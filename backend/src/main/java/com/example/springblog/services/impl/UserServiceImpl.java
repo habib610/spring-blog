@@ -1,6 +1,7 @@
 package com.example.springblog.services.impl;
 
 import com.example.springblog.entities.Users;
+import com.example.springblog.payload.ResourceNotFoundException;
 import com.example.springblog.payload.UserDto;
 import com.example.springblog.repositories.UserRepository;
 import com.example.springblog.services.UserService;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -24,23 +26,39 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDto updateUser(UserDto user, Long userId) {
-        return null;
+    public UserDto updateUser(UserDto userDto, Long userId) {
+        Users users = userRepository.findById(userId)
+                .orElseThrow(()-> new ResourceNotFoundException("User", "id", userId));
+
+        users.setPassword(userDto.getPassword());
+        users.setName(userDto.getName());
+        users.setEmail(userDto.getEmail());
+        users.setAbout(userDto.getAbout());
+        Users users1 = userRepository.save(users);
+        UserDto userDto1 = this.convertUsersToDto(users1);
+        return userDto;
     }
 
     @Override
     public UserDto getUserByUserId(Long userId) {
-        return null;
+        Users users = userRepository.findById(userId)
+                .orElseThrow(()-> new ResourceNotFoundException("User", "id", userId));
+        return this.convertUsersToDto(users);
+
     }
 
     @Override
     public List<UserDto> getAllUserList() {
-        return null;
+        List<Users> users = userRepository.findAll();
+        List<UserDto> userDtos = users.stream().map(usr -> this.convertUsersToDto(usr)).collect(Collectors.toList());
+        return userDtos;
     }
 
     @Override
     public void deleteUser(Long userId) {
-
+        Users user = userRepository.findById(userId)
+                .orElseThrow(()-> new ResourceNotFoundException("User", "id", userId));
+        userRepository.delete(user);
     }
     private Users convertDtoToUsers(UserDto userDto){
         Users users = new Users();
