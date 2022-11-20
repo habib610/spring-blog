@@ -36,7 +36,7 @@ public class UserServiceImpl implements UserService {
         users.setAbout(userDto.getAbout());
         Users users1 = userRepository.save(users);
         UserDto userDto1 = this.convertUsersToDto(users1);
-        return userDto;
+        return userDto1;
     }
 
     @Override
