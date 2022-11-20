@@ -1,7 +1,7 @@
 package com.example.springblog.services.impl;
 
 import com.example.springblog.entities.Users;
-import com.example.springblog.payload.ResourceNotFoundException;
+import com.example.springblog.exceptions.ResourceNotFoundException;
 import com.example.springblog.payload.UserDto;
 import com.example.springblog.repositories.UserRepository;
 import com.example.springblog.services.UserService;

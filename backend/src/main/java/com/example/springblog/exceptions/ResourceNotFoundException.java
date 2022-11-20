@@ -1,4 +1,4 @@
-package com.example.springblog.payload;
+package com.example.springblog.exceptions;
 
 import lombok.*;
 
