@@ -3,10 +3,11 @@ package com.example.springblog.payload;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.validator.constraints.UniqueElements;
 
-import javax.persistence.UniqueConstraint;
-import javax.validation.constraints.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @NoArgsConstructor
 @Getter
@@ -14,11 +15,11 @@ import javax.validation.constraints.*;
 public class UserDto {
     private Long id;
 
-    @NotEmpty
+    @NotBlank
     @Size(min = 4, max = 100, message = "User name must be minimum 4 characters and max 100 characters")
     private String name;
 
-    @NotEmpty
+    @NotBlank
     @Size(min = 4, max = 500, message = "About must be minimum 4 characters and max 500 characters")
     private String about;
 

@@ -26,13 +26,12 @@ public class UserServiceImpl implements UserService {
         Users users = convertDtoToUsers(userDto);
         Users savedUser = userRepository.save(users);
         return convertUsersToDto(savedUser);
-
     }
 
     @Override
     public UserDto updateUser(UserDto userDto, Long userId) {
         Users users = userRepository.findById(userId)
-                .orElseThrow(()-> new ResourceNotFoundException("User", "id", userId));
+                .orElseThrow(() -> new ResourceNotFoundException("User", "id", userId));
 
         users.setPassword(userDto.getPassword());
         users.setName(userDto.getName());
@@ -46,7 +45,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDto getUserByUserId(Long userId) {
         Users users = userRepository.findById(userId)
-                .orElseThrow(()-> new ResourceNotFoundException("User", "id", userId));
+                .orElseThrow(() -> new ResourceNotFoundException("User", "id", userId));
         return this.convertUsersToDto(users);
 
     }
@@ -54,17 +53,20 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<UserDto> getAllUserList() {
         List<Users> users = userRepository.findAll();
-        List<UserDto> userDtos = users.stream().map(usr -> this.convertUsersToDto(usr)).collect(Collectors.toList());
+        List<UserDto> userDtos = users.stream()
+                .map(usr -> this.convertUsersToDto(usr))
+                .collect(Collectors.toList());
         return userDtos;
     }
 
     @Override
     public void deleteUser(Long userId) {
         Users user = userRepository.findById(userId)
-                .orElseThrow(()-> new ResourceNotFoundException("User", "id", userId));
+                .orElseThrow(() -> new ResourceNotFoundException("User", "id", userId));
         userRepository.delete(user);
     }
-    private Users convertDtoToUsers(UserDto userDto){
+
+    private Users convertDtoToUsers(UserDto userDto) {
         Users users = modelMapper.map(userDto, Users.class);
 //        Users users = new Users();
 //        users.setId(userDto.getId());
@@ -72,11 +74,11 @@ public class UserServiceImpl implements UserService {
 //        users.setAbout(userDto.getAbout());
 //        users.setEmail(userDto.getEmail());
 //        users.setPassword(userDto.getPassword());
-        return  users;
+        return users;
     }
 
-    private UserDto convertUsersToDto(Users users){
+    private UserDto convertUsersToDto(Users users) {
         UserDto userDto = modelMapper.map(users, UserDto.class);
-        return  userDto;
+        return userDto;
     }
 }
