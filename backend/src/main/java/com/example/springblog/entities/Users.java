@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -42,4 +44,8 @@ public class Users {
             nullable = false
     )
     private String password;
+
+
+    @OneToMany( mappedBy = "users" ,fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Post> postList = new ArrayList<>();
 }

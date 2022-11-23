@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "categories")
@@ -13,6 +15,7 @@ import javax.persistence.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+
 public class Category {
     @Id
     @SequenceGenerator(name = "category_id_sequence", sequenceName = "category_id_sequence", allocationSize = 1)
@@ -24,4 +27,7 @@ public class Category {
 
     @Column(name = "description", nullable = false, length = 100)
     private String categoryDescription;
+
+    @OneToMany( mappedBy = "category" ,fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Post> postList = new ArrayList<>();
 }
