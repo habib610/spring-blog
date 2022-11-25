@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class PostServiceImpl implements PostServices {
@@ -32,13 +33,13 @@ public class PostServiceImpl implements PostServices {
     @Autowired
     private ModelMapper modelMapper;
 
+    //    Create new post
     @Override
     public PostDto createPost(PostDto postDto, Long userId, Long categoryId) {
         Optional<Category> category = categoryRepository.findById(categoryId);
-        if(!category.isPresent()) throw new ResourceNotFoundException("Category", "id", categoryId);
+        if (!category.isPresent()) throw new ResourceNotFoundException("Category", "id", categoryId);
 
         Users user = userRepository.findById(userId).orElseThrow(() -> new ResourceNotFoundException("User", "id", userId));
-
 
         Post post = modelMapper.map(postDto, Post.class);
         post.setImageName("default.jpg");
@@ -50,33 +51,59 @@ public class PostServiceImpl implements PostServices {
         return modelMapper.map(savedPost, PostDto.class);
     }
 
+    //UPDATE post by postId
     @Override
-    public Post updatePost(Post post, Long postId) {
-        return null;
+    public PostDto updatePost(PostDto post, Long postId) {
+        Post existingPost = postRepository.findById(postId).orElseThrow(() -> new ResourceNotFoundException("Post", "id", postId));
+        existingPost.setImageName(post.getImageName());
+        existingPost.setContent(post.getContent());
+        existingPost.setTitle(post.getTitle());
+        Post savedPost = postRepository.save(existingPost);
+
+        return modelMapper.map(savedPost, PostDto.class);
     }
 
+    //DELETE post by post ID
     @Override
     public void deletePost(Long postId) {
 
+        Post post = postRepository.findById(postId).orElseThrow(() -> new ResourceNotFoundException("Post", "id", postId));
+        postRepository.delete(post);
     }
 
+    //GET all posts
     @Override
-    public List<Post> getAllPosts() {
-        return null;
+    public List<PostDto> getAllPosts() {
+        List<Post> postList = postRepository.findAll();
+        List<PostDto> postDtoList = postList
+                .stream()
+                .map(post -> modelMapper
+                        .map(post, PostDto.class))
+                .collect(Collectors.toList());
+        return postDtoList;
     }
 
+    //    GET post by categoryId
     @Override
-    public List<Post> getAllPostByCategory(Long categoryId) {
-        return null;
+    public List<PostDto> getAllPostByCategoryId(Long categoryId) {
+        Category category = categoryRepository
+                .findById(categoryId)
+                .orElseThrow(() -> new ResourceNotFoundException("Category", "id", categoryId));
+        List<Post> postList = postRepository.getAllByCategory(category);
+
+        return postList.stream().map(post -> modelMapper.map(post, PostDto.class)).collect(Collectors.toList());
     }
 
+    //    GET post by userId
     @Override
-    public List<Post> getAllPostByUser(Long userId) {
-        return null;
+    public List<PostDto> getAllPostByUserId(Long userId) {
+        Users users = userRepository
+                .findById(userId)
+                .orElseThrow(() -> new ResourceNotFoundException("User", "id", userId));
+        List<Post> postList = postRepository.getAllByUsers(users);
+
+        return postList.stream().map(post -> modelMapper.map(post, PostDto.class)).collect(Collectors.toList());
+
     }
 
-    @Override
-    public List<Post> searchPostByUser(String keyword) {
-        return null;
-    }
 }
