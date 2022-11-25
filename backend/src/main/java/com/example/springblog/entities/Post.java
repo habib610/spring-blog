@@ -1,10 +1,19 @@
 package com.example.springblog.entities;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity
 @Table(name = "posts")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Post {
     @Id
     @SequenceGenerator(name = "post_id_sequence", sequenceName = "post_id_sequence", allocationSize = 1)
@@ -23,6 +32,7 @@ public class Post {
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     private Users users;
