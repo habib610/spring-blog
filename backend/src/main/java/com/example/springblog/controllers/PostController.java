@@ -1,6 +1,7 @@
 package com.example.springblog.controllers;
 
 import com.example.springblog.payload.PostDto;
+import com.example.springblog.payload.PostResponse;
 import com.example.springblog.response.ApiResponse;
 import com.example.springblog.services.PostServices;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,8 +30,12 @@ public class PostController {
 
 //    GET all posts
     @GetMapping("/posts")
-    public ResponseEntity<List<PostDto>> getAllPosts(){
-        List<PostDto> postDtoList = postServices.getAllPosts();
+    public ResponseEntity<PostResponse> getAllPosts(
+            @RequestParam(value = "pageSize", defaultValue = "10", required = false) Integer pageSize,
+            @RequestParam(value = "pageNumber", defaultValue = "0", required = false) Integer pageNumber
+
+            ){
+        PostResponse postDtoList = postServices.getAllPosts( pageNumber, pageSize);
         return ResponseEntity.ok(postDtoList);
     }
     //    DELETE post by postID

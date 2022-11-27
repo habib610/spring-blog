@@ -5,12 +5,16 @@ import com.example.springblog.entities.Post;
 import com.example.springblog.entities.Users;
 import com.example.springblog.exceptions.ResourceNotFoundException;
 import com.example.springblog.payload.PostDto;
+import com.example.springblog.payload.PostResponse;
 import com.example.springblog.repositories.CategoryRepository;
 import com.example.springblog.repositories.PostRepository;
 import com.example.springblog.repositories.UserRepository;
 import com.example.springblog.services.PostServices;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -73,14 +77,25 @@ public class PostServiceImpl implements PostServices {
 
     //GET all posts
     @Override
-    public List<PostDto> getAllPosts() {
-        List<Post> postList = postRepository.findAll();
+    public PostResponse getAllPosts(Integer pageNumber, Integer pageSize) {
+       Pageable pageable =  PageRequest.of(pageNumber, pageSize);
+
+        Page<Post> page = postRepository.findAll(pageable);
+        List<Post> postList = page.getContent();
         List<PostDto> postDtoList = postList
                 .stream()
                 .map(post -> modelMapper
                         .map(post, PostDto.class))
                 .collect(Collectors.toList());
-        return postDtoList;
+
+        PostResponse postResponse = new PostResponse();
+        postResponse.setContent(postDtoList);
+        postResponse.setPageNumber(page.getNumber());
+        postResponse.setPageSize(page.getSize());
+        postResponse.setTotalElements(page.getTotalElements());
+        postResponse.setLastPage(page.isLast());
+        postResponse.setFirstPage(page.isFirst());
+        return postResponse;
     }
 
     //    GET post by categoryId
