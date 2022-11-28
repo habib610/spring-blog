@@ -17,13 +17,15 @@ public interface PostServices {
     void deletePost(Long postId);
 
     //    Get All Posts
-    PostResponse getAllPosts(Integer pageNumber, Integer pageSize);
+    PostResponse getAllPosts(Integer pageNumber, Integer pageSize, String sort, String order);
 
     //   Get All Post by category
     List<PostDto> getAllPostByCategoryId(Long categoryId);
 
     //   Get All Post by user
     List<PostDto> getAllPostByUserId(Long userId);
+    //   Get All Post by keyword
+    List<PostDto> getPostByTitle(String kyeword);
 
 
 }

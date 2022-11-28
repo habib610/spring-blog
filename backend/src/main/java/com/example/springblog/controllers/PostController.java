@@ -32,10 +32,11 @@ public class PostController {
     @GetMapping("/posts")
     public ResponseEntity<PostResponse> getAllPosts(
             @RequestParam(value = "pageSize", defaultValue = "10", required = false) Integer pageSize,
-            @RequestParam(value = "pageNumber", defaultValue = "0", required = false) Integer pageNumber
-
+            @RequestParam(value = "pageNumber", defaultValue = "0", required = false) Integer pageNumber,
+            @RequestParam(value="sort", defaultValue = "id", required = false) String sort,
+            @RequestParam(value="order", defaultValue = "desc", required = false) String order
             ){
-        PostResponse postDtoList = postServices.getAllPosts( pageNumber, pageSize);
+        PostResponse postDtoList = postServices.getAllPosts( pageNumber, pageSize,sort, order );
         return ResponseEntity.ok(postDtoList);
     }
     //    DELETE post by postID
@@ -70,5 +71,11 @@ public class PostController {
     public ResponseEntity<PostDto> updatePost(@Valid @RequestBody PostDto postDto, @PathVariable Long postId){
      PostDto postDto1 =   postServices.updatePost(postDto, postId);
         return new ResponseEntity<>(postDto1, HttpStatus.OK);
+    }
+    // GET search by title
+    @GetMapping("/posts/search/{keyword}")
+    public ResponseEntity<List<PostDto>> searchPostByTitle(@PathVariable String keyword){
+        List<PostDto>  postDto =  postServices.getPostByTitle(keyword);
+        return new ResponseEntity<>(postDto,HttpStatus.OK);
     }
 }

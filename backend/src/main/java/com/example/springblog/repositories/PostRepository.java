@@ -12,4 +12,5 @@ import java.util.List;
 public interface PostRepository extends JpaRepository<Post, Long> {
     List<Post> getAllByUsers(Users users);
     List<Post> getAllByCategory(Category category);
+    List<Post> getByTitleContaining(String keyword);
 }
