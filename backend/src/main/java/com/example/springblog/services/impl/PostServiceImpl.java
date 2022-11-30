@@ -77,6 +77,14 @@ public class PostServiceImpl implements PostServices {
         postRepository.delete(post);
     }
 
+//    GET post by Id
+    @Override
+    public PostDto getPostById(Long postId) {
+      Post post =  postRepository.findById(postId).orElseThrow(() -> new ResourceNotFoundException("Post", "id", postId));
+
+        return modelMapper.map(post, PostDto.class);
+    }
+
     //GET all posts
     @Override
     public PostResponse getAllPosts(Integer pageNumber, Integer pageSize,String sort, String order) {
