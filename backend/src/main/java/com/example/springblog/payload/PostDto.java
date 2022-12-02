@@ -1,5 +1,6 @@
 package com.example.springblog.payload;
 
+import com.example.springblog.entities.Comment;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,6 +9,8 @@ import lombok.Setter;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -26,4 +29,6 @@ public class PostDto {
 
     private CategoryDto category;
     private UserDto users;
+
+    private Set<CommentDto> comments = new HashSet<>();
 }
