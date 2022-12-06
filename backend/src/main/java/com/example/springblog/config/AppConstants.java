@@ -1,4 +1,4 @@
-package com.example.springblog;
+package com.example.springblog.config;
 
 public class AppConstants {
     public static final String USER_PATH = "/api/users";
