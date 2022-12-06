@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class CategoryServiceImpl implements CategoryServices {
@@ -44,8 +45,8 @@ public class CategoryServiceImpl implements CategoryServices {
         List<Category> categories = categoryRepository.findAll();
         List<CategoryDto> categoryDtos = categories
                 .stream()
-                .map(this::convertCategoryToCategoryDto)
-                .toList();
+                .map(category -> modelMapper.map(category, CategoryDto.class))
+                .collect(Collectors.toList());
         return categoryDtos;
     }
 

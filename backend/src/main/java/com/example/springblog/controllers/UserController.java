@@ -1,5 +1,6 @@
 package com.example.springblog.controllers;
 
+import com.example.springblog.AppConstants;
 import com.example.springblog.payload.UserDto;
 import com.example.springblog.response.ApiResponse;
 import com.example.springblog.services.UserService;
@@ -12,13 +13,13 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/api/users")
+@RequestMapping(path = AppConstants.USER_PATH)
 public class UserController {
     @Autowired
     private UserService userService;
 
     //    POST - create a new user
-    @PostMapping("/")
+    @PostMapping(AppConstants.USER_BASE)
     public ResponseEntity<UserDto> createUser(@Valid @RequestBody UserDto userDto) {
         UserDto createdUser = userService.createUser(userDto);
         return new ResponseEntity<>(createdUser, HttpStatus.CREATED); // One way to send response with body and HttpStatus
@@ -26,7 +27,7 @@ public class UserController {
 
 
     //    GET - get all users
-    @GetMapping("/")
+    @GetMapping(AppConstants.USER_BASE)
     public ResponseEntity<List<UserDto>> getListOfUsers() {
         return ResponseEntity.ok(userService.getAllUserList()); // another way to send response with body and HttpStatus
     }
