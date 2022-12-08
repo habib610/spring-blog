@@ -3,6 +3,7 @@ package com.example.springblog.controllers;
 import com.example.springblog.AppConstants;
 import com.example.springblog.payload.UserDto;
 import com.example.springblog.response.ApiResponse;
+import com.example.springblog.response.UserDetailResponse;
 import com.example.springblog.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -29,14 +30,14 @@ public class UserController {
 
     //    GET - get all users
     @GetMapping(AppConstants.USER_BASE)
-    public ResponseEntity<List<UserDto>> getListOfUsers() {
+    public ResponseEntity<List<UserDetailResponse>> getListOfUsers() {
         return ResponseEntity.ok(userService.getAllUserList()); // another way to send response with body and HttpStatus
     }
 
 
     //    GET - get single user by userId
     @GetMapping("/{userId}")
-    public ResponseEntity<UserDto> getUserByUserId(@PathVariable Long userId) {
+    public ResponseEntity<UserDetailResponse> getUserByUserId(@PathVariable Long userId) {
         return ResponseEntity.ok(userService.getUserByUserId(userId));
     }
 

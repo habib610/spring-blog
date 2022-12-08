@@ -7,6 +7,7 @@ import com.example.springblog.exceptions.ResourceNotFoundException;
 import com.example.springblog.payload.UserDto;
 import com.example.springblog.repositories.RoleRepository;
 import com.example.springblog.repositories.UserRepository;
+import com.example.springblog.response.UserDetailResponse;
 import com.example.springblog.services.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +32,7 @@ public class UserServiceImpl implements UserService {
     private RoleRepository roleRepository;
 
     @Override
-    public UserDto registerUser(UserDto userDto) {
+    public UserDetailResponse registerUser(UserDto userDto) {
          Users user = modelMapper.map(userDto, Users.class);
 
 //         Encode the password
@@ -44,7 +45,7 @@ public class UserServiceImpl implements UserService {
        Users savedUser = userRepository.save(user);
 
 
-         return modelMapper.map(savedUser, UserDto.class);
+         return modelMapper.map(savedUser, UserDetailResponse.class);
     }
 
     @Override
@@ -69,20 +70,20 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDto getUserByUserId(Long userId) {
+    public UserDetailResponse getUserByUserId(Long userId) {
         Users users = userRepository.findById(userId)
                 .orElseThrow(() -> new ResourceNotFoundException("User", "id", userId));
-        return this.convertUsersToDto(users);
+        return modelMapper.map(users, UserDetailResponse.class);
 
     }
 
     @Override
-    public List<UserDto> getAllUserList() {
+    public List<UserDetailResponse> getAllUserList() {
         List<Users> users = userRepository.findAll();
-        List<UserDto> userDtos = users.stream()
-                .map(usr -> this.convertUsersToDto(usr))
+        List<UserDetailResponse> userResponse = users.stream()
+                .map(usr -> this.modelMapper.map(usr, UserDetailResponse.class))
                 .collect(Collectors.toList());
-        return userDtos;
+        return userResponse;
     }
 
     @Override

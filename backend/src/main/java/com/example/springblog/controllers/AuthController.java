@@ -5,8 +5,10 @@ import com.example.springblog.exceptions.ApiException;
 import com.example.springblog.payload.JwtAuthRequest;
 import com.example.springblog.payload.JwtAuthResponse;
 import com.example.springblog.payload.UserDto;
+import com.example.springblog.response.UserDetailResponse;
 import com.example.springblog.security.JwtTokenHelper;
 import com.example.springblog.services.UserService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,6 +27,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthController {
     @Autowired
     private JwtTokenHelper jwtTokenHelper;
+    @Autowired
+    private ModelMapper modelMapper;
     @Autowired
     private UserDetailsService userDetailsService;
 
@@ -49,10 +53,10 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<UserDto> registerUser(@RequestBody UserDto userDto){
-        UserDto userDto1=  userService.registerUser(userDto);
+    public ResponseEntity<UserDetailResponse> registerUser(@RequestBody UserDto userDto){
+        UserDetailResponse response=  userService.registerUser(userDto);
 
-        return  new ResponseEntity<>(userDto1, HttpStatus.CREATED);
+        return  new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
     private void authenticateUser(String username, String password) throws Exception {
