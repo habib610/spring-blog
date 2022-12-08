@@ -29,7 +29,7 @@ public class UserDto {
     @Email(message = "Valid email required!")
     private String email;
 
-    @JsonIgnore
+
     @NotBlank
     @Size(min = 4, max = 10, message = "Password must be minimum 4 characters and max 10 characters")
     private String password;
