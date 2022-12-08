@@ -1,5 +1,6 @@
 package com.example.springblog.entities;
 
+<<<<<<< HEAD
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,6 +11,13 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+=======
+import lombok.*;
+
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+>>>>>>> parent of eeceea8 (basic-authentcation-with-database)
 
 @Entity
 @Table(name = "users")
@@ -52,6 +60,7 @@ public class Users {
 
     @OneToMany(mappedBy = "users", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Post> postList = new ArrayList<>();
+<<<<<<< HEAD
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "user_role",
@@ -61,4 +70,6 @@ public class Users {
     )
     private Set<Role> roles = new HashSet<>();
 
+=======
+>>>>>>> parent of eeceea8 (basic-authentcation-with-database)
 }

@@ -1,6 +1,6 @@
 package com.example.springblog.controllers;
 
-import com.example.springblog.config.AppConstants;
+import com.example.springblog.AppConstants;
 import com.example.springblog.payload.UserDto;
 import com.example.springblog.response.ApiResponse;
 import com.example.springblog.services.UserService;
