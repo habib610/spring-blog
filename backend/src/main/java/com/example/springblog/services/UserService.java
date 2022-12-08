@@ -5,7 +5,7 @@ import com.example.springblog.payload.UserDto;
 import java.util.List;
 
 public interface UserService {
-
+    public UserDto registerUser(UserDto user);
     UserDto createUser(UserDto user);
 
     UserDto updateUser(UserDto user, Long userId);

@@ -20,12 +20,6 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private ModelMapper modelMapper;
-<<<<<<< HEAD
-
-    @Autowired
-    private RoleRepository roleRepository;
-=======
->>>>>>> parent of 237b7aa (register-new-user-with-Role)
 
     @Override
     public UserDto registerUser(UserDto user) {
@@ -92,8 +86,5 @@ public class UserServiceImpl implements UserService {
         UserDto userDto = modelMapper.map(users, UserDto.class);
         return userDto;
     }
-<<<<<<< HEAD
 
-=======
->>>>>>> parent of 237b7aa (register-new-user-with-Role)
 }

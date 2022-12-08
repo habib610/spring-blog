@@ -2,15 +2,10 @@ package com.example.springblog.controllers;
 
 import com.example.springblog.AppConstants;
 import com.example.springblog.payload.UserDto;
-import com.example.springblog.response.ApiResponse;
 import com.example.springblog.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-<<<<<<< HEAD
-=======
-import org.springframework.security.access.prepost.PreAuthorize;
->>>>>>> parent of 237b7aa (register-new-user-with-Role)
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -31,10 +26,7 @@ public class UserController {
 
 
     //    GET - get all users
-<<<<<<< HEAD
-//    @RolesAllowed({ "ROLE_VIEWER", "ROLE_EDITOR", "ROLE_ADMIN" })
-=======
->>>>>>> parent of 237b7aa (register-new-user-with-Role)
+
     @GetMapping(AppConstants.USER_BASE)
     public ResponseEntity<List<UserDto>> getListOfUsers() {
         return ResponseEntity.ok(userService.getAllUserList()); // another way to send response with body and HttpStatus
@@ -56,19 +48,4 @@ public class UserController {
         return ResponseEntity.ok(updateUser);
     }
 
-//    ACCESS=> ADMIN
-    //    DELETE - Delete user by userId
-    @PreAuthorize("hasRole('ADMIN')")
-    @DeleteMapping("/{userId}")
-    public ResponseEntity<ApiResponse> deleteUserByUserId(
-            @PathVariable("userId") Long uId) { // name path variable anything now
-        userService.deleteUser(uId);
-//            Returns JSON Object using custom class
-        return ResponseEntity.ok(
-                new ApiResponse("User Has been Deleted Successfully", true));
-
-//       Another simple way to  Returns JSON Object using Map
-//        return new  ResponseEntity(Map.of("message" , "User has been deleted successfully"), HttpStatus.OK);
-
-    }
 }

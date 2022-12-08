@@ -1,7 +1,6 @@
 package com.example.springblog.payload;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -34,8 +33,5 @@ public class UserDto {
     @NotBlank
     @Size(min = 4, max = 10, message = "Password must be minimum 4 characters and max 10 characters")
     private String password;
-<<<<<<< HEAD
 
-=======
->>>>>>> parent of 237b7aa (register-new-user-with-Role)
 }
