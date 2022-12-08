@@ -6,7 +6,10 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity
-@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 public class Role {
     @Id
     private Long id;

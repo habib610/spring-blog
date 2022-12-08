@@ -1,6 +1,5 @@
 package com.example.springblog.payload;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -9,6 +8,8 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.HashSet;
+import java.util.Set;
 
 
 @NoArgsConstructor
@@ -34,4 +35,5 @@ public class UserDto {
     @Size(min = 4, max = 10, message = "Password must be minimum 4 characters and max 10 characters")
     private String password;
 
+    private Set<RoleDto> roles = new HashSet<>();
 }
