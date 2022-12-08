@@ -38,5 +38,4 @@ public class UserDto {
     @Size(min = 4, max = 10, message = "Password must be minimum 4 characters and max 10 characters")
     private String password;
 
-    private Set<RoleDto> roles = new HashSet<>();
 }
