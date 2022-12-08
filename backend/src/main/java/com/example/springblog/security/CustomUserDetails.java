@@ -19,7 +19,7 @@ public class CustomUserDetails implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Users user = userRepository
                 .findByEmail(username)
-                .orElseThrow(() -> new ResourceNotFoundException("User", "id", 0));
+                .orElseThrow(() -> new ResourceNotFoundException("User", "with email " + username, 0));
         return user;
     }
 }

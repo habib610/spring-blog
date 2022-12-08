@@ -7,9 +7,11 @@ import com.example.springblog.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.security.RolesAllowed;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -28,6 +30,7 @@ public class UserController {
 
 
     //    GET - get all users
+    @RolesAllowed({ "ROLE_VIEWER", "ROLE_EDITOR", "ROLE_ADMIN" })
     @GetMapping(AppConstants.USER_BASE)
     public ResponseEntity<List<UserDto>> getListOfUsers() {
         return ResponseEntity.ok(userService.getAllUserList()); // another way to send response with body and HttpStatus
@@ -51,7 +54,7 @@ public class UserController {
 
 //    ACCESS=> ADMIN
     //    DELETE - Delete user by userId
-    @PreAuthorize("hasRole('ADMIN')")
+
     @DeleteMapping("/{userId}")
     public ResponseEntity<ApiResponse> deleteUserByUserId(
             @PathVariable("userId") Long uId) { // name path variable anything now

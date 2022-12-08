@@ -1,12 +1,16 @@
 package com.example.springblog.services.impl;
 
+import com.example.springblog.config.AppConstants;
+import com.example.springblog.entities.Role;
 import com.example.springblog.entities.Users;
 import com.example.springblog.exceptions.ResourceNotFoundException;
 import com.example.springblog.payload.UserDto;
+import com.example.springblog.repositories.RoleRepository;
 import com.example.springblog.repositories.UserRepository;
 import com.example.springblog.services.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,6 +24,10 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private ModelMapper modelMapper;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+    @Autowired
+    private RoleRepository roleRepository;
 
     @Override
     public UserDto createUser(UserDto userDto) {
@@ -80,5 +88,23 @@ public class UserServiceImpl implements UserService {
     private UserDto convertUsersToDto(Users users) {
         UserDto userDto = modelMapper.map(users, UserDto.class);
         return userDto;
+    }
+
+    @Override
+    public UserDto registerUser(UserDto userDto) {
+        Users user = modelMapper.map(userDto, Users.class);
+
+
+//  Encode the password
+        user.setPassword(passwordEncoder.encode(userDto.getPassword()));
+
+//        Set roles
+       Role role = roleRepository.findById(AppConstants.ROLE_USER).get();
+
+       user.getRoles().add(role);
+
+       Users savedUser = userRepository.save(user);
+
+        return modelMapper.map(savedUser, UserDto.class);
     }
 }
