@@ -58,18 +58,18 @@ public class PostController {
     }
 
 
-
     //    DELETE post by postID
     @DeleteMapping("/posts/{postId}")
     public ResponseEntity<ApiResponse> deletePostById(@PathVariable Long postId) {
         postServices.deletePost(postId);
         return new ResponseEntity<>(new ApiResponse("Post with id " + postId + " has been deleted", true), HttpStatus.OK);
     }
+
     //    GET post by postID
     @GetMapping("/posts/{postId}")
     public ResponseEntity<PostDto> getPostByPostId(@PathVariable Long postId) {
-      PostDto postDto =  postServices.getPostById(postId);
-        return  new ResponseEntity<>(postDto, HttpStatus.OK);
+        PostDto postDto = postServices.getPostById(postId);
+        return new ResponseEntity<>(postDto, HttpStatus.OK);
     }
 
     //    GET post by Category
@@ -100,13 +100,13 @@ public class PostController {
         return new ResponseEntity<>(postDto, HttpStatus.OK);
     }
 
-//    File uploade services
+    //    File uploade services
     @PostMapping("/posts/image/upload/{postId}")
     public ResponseEntity<PostDto> uploadImage(
             @RequestParam("image") MultipartFile image,
             @PathVariable Long postId
     ) throws IOException {
-        PostDto postDto =   postServices.getPostById(postId);
+        PostDto postDto = postServices.getPostById(postId);
         String fileName = fileService.uploadFile(filePath, image);
         postDto.setImageName(fileName);
         PostDto updatePost = postServices.updatePost(postDto, postId);

@@ -53,10 +53,10 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<UserDetailResponse> registerUser(@RequestBody UserDto userDto){
-        UserDetailResponse response=  userService.registerUser(userDto);
+    public ResponseEntity<UserDetailResponse> registerUser(@RequestBody UserDto userDto) {
+        UserDetailResponse response = userService.registerUser(userDto);
 
-        return  new ResponseEntity<>(response, HttpStatus.CREATED);
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
     private void authenticateUser(String username, String password) throws Exception {

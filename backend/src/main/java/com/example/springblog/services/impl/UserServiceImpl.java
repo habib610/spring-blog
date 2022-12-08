@@ -33,19 +33,19 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDetailResponse registerUser(UserDto userDto) {
-         Users user = modelMapper.map(userDto, Users.class);
+        Users user = modelMapper.map(userDto, Users.class);
 
 //         Encode the password
-         user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
 
 //         Set the role
-       Role role = roleRepository.findById(AppConstants.ROLE_USER).get();
-       user.getRoles().add(role);
+        Role role = roleRepository.findById(AppConstants.ROLE_USER).get();
+        user.getRoles().add(role);
 
-       Users savedUser = userRepository.save(user);
+        Users savedUser = userRepository.save(user);
 
 
-         return modelMapper.map(savedUser, UserDetailResponse.class);
+        return modelMapper.map(savedUser, UserDetailResponse.class);
     }
 
     @Override

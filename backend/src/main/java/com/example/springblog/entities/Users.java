@@ -66,7 +66,7 @@ public class Users implements UserDetails {
     public Collection<? extends GrantedAuthority> getAuthorities() {
 
         return roles.stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
-                 }
+    }
 
     @Override
     public String getUsername() {

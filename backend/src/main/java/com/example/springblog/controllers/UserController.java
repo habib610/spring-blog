@@ -20,13 +20,6 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    //    POST - create a new user
-    @PostMapping(AppConstants.USER_BASE)
-    public ResponseEntity<UserDto> createUser(@Valid @RequestBody UserDto userDto) {
-        UserDto createdUser = userService.createUser(userDto);
-        return new ResponseEntity<>(createdUser, HttpStatus.CREATED); // One way to send response with body and HttpStatus
-    }
-
 
     //    GET - get all users
     @GetMapping(AppConstants.USER_BASE)
@@ -40,7 +33,6 @@ public class UserController {
     public ResponseEntity<UserDetailResponse> getUserByUserId(@PathVariable Long userId) {
         return ResponseEntity.ok(userService.getUserByUserId(userId));
     }
-
 
 
     //    PUT - update user by userId

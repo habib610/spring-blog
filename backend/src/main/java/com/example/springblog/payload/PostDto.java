@@ -1,6 +1,5 @@
 package com.example.springblog.payload;
 
-import com.example.springblog.entities.Comment;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

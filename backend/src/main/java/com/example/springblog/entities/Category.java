@@ -27,6 +27,6 @@ public class Category {
     @Column(name = "description", nullable = false, length = 100)
     private String categoryDescription;
 
-    @OneToMany( mappedBy = "category" ,fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "category", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Post> postList = new ArrayList<>();
 }

@@ -14,13 +14,14 @@ import org.springframework.stereotype.Service;
 @Service
 public class CommentServiceImpl implements CommentService {
     @Autowired
-   private PostRepository postRepository;
+    private PostRepository postRepository;
 
     @Autowired
     private CommentRepository commentRepository;
 
     @Autowired
     private ModelMapper modelMapper;
+
     @Override
     public CommentDto createComment(CommentDto commentDto, Long postId) {
         Post post = postRepository.findById(postId).orElseThrow(() -> new ResourceNotFoundException("Post", "id", postId));
@@ -33,7 +34,7 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public void deleteComment(Long commentId) {
-       Comment comment = commentRepository.findById(commentId).orElseThrow(() -> new ResourceNotFoundException("Comment", "id", commentId));
+        Comment comment = commentRepository.findById(commentId).orElseThrow(() -> new ResourceNotFoundException("Comment", "id", commentId));
         commentRepository.delete(comment);
     }
 }

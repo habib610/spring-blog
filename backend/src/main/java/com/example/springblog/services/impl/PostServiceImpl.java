@@ -77,20 +77,20 @@ public class PostServiceImpl implements PostServices {
         postRepository.delete(post);
     }
 
-//    GET post by Id
+    //    GET post by Id
     @Override
     public PostDto getPostById(Long postId) {
-      Post post =  postRepository.findById(postId).orElseThrow(() -> new ResourceNotFoundException("Post", "id", postId));
+        Post post = postRepository.findById(postId).orElseThrow(() -> new ResourceNotFoundException("Post", "id", postId));
 
         return modelMapper.map(post, PostDto.class);
     }
 
     //GET all posts
     @Override
-    public PostResponse getAllPosts(Integer pageNumber, Integer pageSize,String sort, String order) {
+    public PostResponse getAllPosts(Integer pageNumber, Integer pageSize, String sort, String order) {
         Sort sorted = Objects.equals(order, "asc") ? Sort.by(sort).ascending() : Sort.by(sort).descending();
 
-        Pageable pageable =  PageRequest.of(pageNumber, pageSize, sorted);
+        Pageable pageable = PageRequest.of(pageNumber, pageSize, sorted);
 
         Page<Post> page = postRepository.findAll(pageable);
         List<Post> postList = page.getContent();
@@ -132,6 +132,7 @@ public class PostServiceImpl implements PostServices {
         return postList.stream().map(post -> modelMapper.map(post, PostDto.class)).collect(Collectors.toList());
 
     }
+
     //    GET post by keyword
     @Override
     public List<PostDto> getPostByTitle(String keyword) {
