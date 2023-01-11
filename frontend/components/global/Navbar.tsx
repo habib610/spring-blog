@@ -11,7 +11,7 @@ const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
     return (
         <nav>
-            <div className="border-b border-b-gray-200 backdrop-blur-xl fixed top-0 left-0 right-0 bg-black">
+            <div className=" backdrop-blur-xl fixed top-0 left-0 right-0 bg-gray-700">
                 <div className="flex px-4 md:px-8 justify-between items-center links-center py-3 sm:container mx-auto  ">
                     <div>
                         <Link href={HOME}>
