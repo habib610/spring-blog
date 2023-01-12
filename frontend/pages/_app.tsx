@@ -14,10 +14,12 @@ export default function App({ Component, pageProps }: AppProps) {
             <header>
                 <Navbar />
             </header>
-            <main>
-                <Component {...pageProps} />
-            </main>
-            <footer>footer</footer>
+            <div className="min-h-screen flex flex-col">
+                <main className="flex-1">
+                    <Component {...pageProps} />
+                </main>
+                <footer>footer</footer>
+            </div>
         </div>
     );
 }

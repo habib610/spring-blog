@@ -6,19 +6,19 @@ const Hero = () => {
                     <h1 className="text-4xl md:text-3xl lg:text-6xl text-black font-extrabold">
                         Read Books <br /> Publish knowledge
                     </h1>
-                    <p className="text-lg text-gray-500 my-2  ">
+                    <p className="text-lg text-gray-500 my-3  ">
                         Discover stories, thinking, and expertise from writers
                         on any topic.{" "}
                     </p>
 
-                    <form className=" w-[100%] md:w-[80%] flex rounded-full border transition-all shadow-sm  border-gray-400  focus-within:border-blue-500 items-center overflow-hidden relative">
+                    <form className=" w-[100%] md:w-[80%] flex rounded-full border transition-all shadow-sm  border-gray-400  focus-within:border-blue-500 items-center overflow-hidden relative mt-4">
                         <input
                             placeholder="Search for stories"
                             type="text"
                             className="outline-none border-none focus:border-none  px-3 w-full rounded-full  flex-1 h-full py-2 pl-6 "
                         />
 
-                        <button className="absolute top-0 right-0 bottom-0 px-4">
+                        <button className="absolute top-0 right-0 bottom-0 px-4 ">
                             <svg
                                 className="text-gray-600 h-4 w-4 fill-current"
                                 xmlns="http://www.w3.org/2000/svg"
