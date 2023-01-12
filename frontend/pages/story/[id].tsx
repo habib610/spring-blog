@@ -46,7 +46,7 @@ const ReadContent = () => {
             <Meta content={POST.title} title={`Story by @${POST.users.name}`} />
             <div className="min-h-screen ">
                 <Container>
-                    <div className="flex flex-col lg:flex-row py-32">
+                    <div className="flex flex-col lg:flex-row pt-24">
                         <div className="lg:w-7/12  px-3 lg:px-3 ">
                             <StoryPage data={POST} />
                         </div>

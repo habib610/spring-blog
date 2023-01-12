@@ -16,7 +16,7 @@ const HorizontalCard = ({ data }: IProps) => {
                     className="bg-gray-500 h-[300px]   md:w-[35%] lg:w-[40%] md:h-auto bg-no-repeat bg-cover bg-center rounded-md"
                     style={{ backgroundImage: `url(${data.imageName}) ` }}
                 ></div>
-                <div className="px-4 py-2 md:px-8  bg-gray-100 flex-1 flex flex-col items-start">
+                <div className="px-4 py-2 md:px-8  bg-gray-50 flex-1 flex flex-col items-start">
                     <CategoryBtn name="Programming" color={PRIMARY} />
                     <Link href={`story/${data.id}`}>
                         <h1 className="text-left text-gray-600 font-bold mt-2 mb-3 line-clamp-2 text-2xl sm:text-3xl md:text-2xl  hover:underline hover:cursor-pointer lg:pr-8">

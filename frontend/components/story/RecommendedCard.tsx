@@ -1,10 +1,11 @@
-import Link from "next/link";
+import { useRouter } from "next/router";
 import { Post } from "../../types/types";
 
 interface IProps {
     data: Post;
 }
 const RecommendedCard = ({ data }: IProps) => {
+    const router = useRouter();
     return (
         <div className="flex flex-col  md:flex-row justify-start md:justify-center bg-gray-50 mb-8  ">
             <div
@@ -12,11 +13,12 @@ const RecommendedCard = ({ data }: IProps) => {
                 style={{ backgroundImage: `url(${data.imageName}) ` }}
             ></div>
             <div className="px-4 py-2 md:px-8  bg-gray-100 flex-1 flex flex-col items-start">
-                <Link href={`story/${data.id}`}>
-                    <h1 className="text-left text-gray-600 font-bold mt-2 mb-3 line-clamp-2 text-2xl sm:text-3xl md:text-2xl  hover:underline hover:cursor-pointer lg:pr-8">
-                        {data.title}
-                    </h1>
-                </Link>
+                <h1
+                    onClick={() => router.push(`/story/${data.id}`)}
+                    className="text-left text-gray-600 font-bold mt-2 mb-3 line-clamp-2 text-2xl sm:text-3xl md:text-2xl  hover:underline hover:cursor-pointer lg:pr-8"
+                >
+                    {data.title}
+                </h1>
 
                 {/* AVATAR  */}
 
