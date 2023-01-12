@@ -1,5 +1,5 @@
-import BlogCard from "../BlogCard";
 import Container from "../global/Container";
+import HorizontalCard from "../global/HorizontalCard";
 import Title from "../global/Title";
 
 const POST = {
@@ -42,7 +42,7 @@ const Trending = () => {
         <div>
             <Container>
                 <Title title="Trending Blogs" />
-                <BlogCard data={POST} />
+                <HorizontalCard data={POST} />
             </Container>
         </div>
     );
