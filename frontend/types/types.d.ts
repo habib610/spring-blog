@@ -11,8 +11,8 @@ export interface User {
     name: string;
     about: string;
     email: string;
-    password: string;
-    roles: Role[];
+    password?: string;
+    roles?: Role[];
 }
 export interface Category {
     categoryId: number;

@@ -1,6 +1,10 @@
 import Image from "next/image";
 import { AVATAR_URL } from "../../constants/common";
+import { PRIMARY } from "../../constants/theme";
 import { Post } from "../../types/types";
+import CategoryBtn from "../global/CategoryBtn";
+import Comment from "../global/Comment";
+import RecommendedCard from "./RecommendedCard";
 
 interface IProps {
     data: Post;
@@ -8,28 +12,35 @@ interface IProps {
 
 const StoryPage = ({ data }: IProps) => {
     return (
-        <div className="bg-green-50 min-h-screen  p-4">
-            <div className="flex items-center border-b-2 border-gray-400 pb-4">
-                <div className="h-16 w-16 md:h-16 md:w-16 rounded-full mr-3 ">
-                    <Image
-                        src={AVATAR_URL}
-                        alt={data.title}
-                        width={400}
-                        height={400}
-                        className="rounded-full object-cover"
-                    />
+        <div className="min-h-screen  p-4 lg:pr-12">
+            <div className=" flex justify-between items-end border-b-2 border-gray-400  pb-4 mb-8">
+                <div className="flex items-center ">
+                    <div className="h-16 w-16 md:h-16 md:w-16 rounded-full mr-3 ">
+                        <Image
+                            src={AVATAR_URL}
+                            alt={data.title}
+                            width={400}
+                            height={400}
+                            className="rounded-full object-cover"
+                        />
+                    </div>
+                    <div>
+                        <h3 className="text-xl font-semibold  text-gray-500">
+                            @{data.users.name}
+                        </h3>
+                        {/* Todo: Change to published Date */}
+                        <p className="text-gray-400  text-sm ">
+                            Published:{" "}
+                            <span className="font-semibold">25 Jun 2022</span>
+                        </p>
+                    </div>
                 </div>
-                <div>
-                    <h3 className="text-xl font-semibold  text-gray-500">
-                        @{data.users.name}
-                    </h3>
-                    {/* Todo: Change to published Date */}
-                    <p className="text-gray-400  text-sm ">
-                        Published:{" "}
-                        <span className="font-semibold">25 Jun 2022</span>
-                    </p>
-                </div>
+                <CategoryBtn
+                    color={PRIMARY}
+                    name={data.category.categoryTitle}
+                />
             </div>
+
             <h1 className="font-bold text-xl sm:text-2xl md:text-3xl mt-4 mb-8">
                 {data.title}
             </h1>
@@ -43,8 +54,10 @@ const StoryPage = ({ data }: IProps) => {
                 />
             </div>
 
-            <div className="pb-12">
-                <p className="text-lg font-normal line mt-8">{data.content}</p>
+            <div className="pb-12 ">
+                <p className="text-xl leading-10 font-normal text-gray-600 mt-8">
+                    {data.content}
+                </p>
             </div>
             {/* Comment Box */}
             <div className="bg-gray-100 p-8">
@@ -62,21 +75,27 @@ const StoryPage = ({ data }: IProps) => {
             </div>
 
             {/* Comments */}
-            <div>
-                <div className="flex items-start">
-                    <div className="w-8 h-8 bg-gray-700 rounded-full text-lg font-bold text-white mr-3 flex items-center justify-center">
-                        A
-                    </div>
-                    <div>
-                        <p className="text-sm text-gray-600  font-semibold">
-                            @UserName
-                        </p>
-                        <p className="text-sm text-gray-700 mt-2 ">
-                            {data.comments[0].content}
-                        </p>
-                    </div>
+            <div className="my-8 border-b border-gray-300">
+                <h2 className="text-xl bl-2 font-semibold">Comments</h2>
+                <div className="ml-8 mt-4">
+                    <Comment
+                        content={data.comments[0].content}
+                        name={data.users.name}
+                    />
+                    <Comment
+                        content={data.comments[0].content}
+                        name={data.users.name}
+                    />
                 </div>
             </div>
+
+            {/* Related Blogs */}
+            <h1 className="text-2xl font-semibold mt-16 my-4">
+                Recommended For You
+            </h1>
+            <RecommendedCard data={data} />
+            <RecommendedCard data={data} />
+            <RecommendedCard data={data} />
         </div>
     );
 };

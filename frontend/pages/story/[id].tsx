@@ -1,8 +1,9 @@
 import Container from "../../components/global/Container";
+import Meta from "../../components/meta";
 import StoryPage from "../../components/story/StoryPage";
 import { StorySidebar } from "../../components/story/StorySidebar";
 
-const POST = {
+export const POST = {
     id: 1,
     title: "What You Probably Don’t Know About Your Pastor When He Preaches",
     content: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
@@ -38,20 +39,24 @@ const POST = {
         },
     ],
 };
+
 const ReadContent = () => {
     return (
-        <div className="min-h-screen ">
-            <Container>
-                <div className="flex flex-col lg:flex-row py-32">
-                    <div className="lg:w-3/4  px-3 lg:px-3 ">
-                        <StoryPage data={POST} />
+        <>
+            <Meta content={POST.title} title={`Story by @${POST.users.name}`} />
+            <div className="min-h-screen ">
+                <Container>
+                    <div className="flex flex-col lg:flex-row py-32">
+                        <div className="lg:w-7/12  px-3 lg:px-3 ">
+                            <StoryPage data={POST} />
+                        </div>
+                        <div className="w-full lg:w-5/12  px-3 lg:px-3 ">
+                            <StorySidebar />
+                        </div>
                     </div>
-                    <div className="w-full lg:w-1/4 h-full px-3 lg:px-3 ">
-                        <StorySidebar />
-                    </div>
-                </div>
-            </Container>
-        </div>
+                </Container>
+            </div>
+        </>
     );
 };
 
