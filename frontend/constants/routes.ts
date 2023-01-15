@@ -1,23 +1,26 @@
 export const HOME = "/";
+export const LOGIN = "/login";
+export const REGISTRATION = "/registration";
+export const WRITE = "/write";
 export const links = [
     {
         id: 1,
         label: "Home",
-        link: "/",
+        link: HOME,
     },
     {
         id: 2,
-        label: "Signin",
-        link: "/",
+        label: "Write",
+        link: WRITE,
     },
     {
         id: 3,
         label: "Login",
-        link: "/",
+        link: LOGIN,
     },
     {
         id: 4,
-        label: "Profile",
-        link: "/",
+        label: "Signup",
+        link: REGISTRATION,
     },
 ];

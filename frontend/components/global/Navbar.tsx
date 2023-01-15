@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import { HiMenuAlt4 } from "react-icons/hi";
@@ -9,9 +10,19 @@ import { HOME, links } from "../../constants/routes";
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
+    const routes = useRouter();
+    console.log(routes);
+    const isHidden =
+        routes.pathname === "/login" || routes.pathname === "/registration";
     return (
         <nav>
-            <div className="border-b border-b-gray-200 backdrop-blur-xl fixed top-0 left-0 right-0 bg-black">
+            <div
+                className={
+                    isHidden
+                        ? "hidden"
+                        : " backdrop-blur-xl fixed top-0 left-0 right-0 bg-gray-700 z-10"
+                }
+            >
                 <div className="flex px-4 md:px-8 justify-between items-center links-center py-3 sm:container mx-auto  ">
                     <div>
                         <Link href={HOME}>
