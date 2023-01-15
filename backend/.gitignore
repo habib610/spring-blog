@@ -32,3 +32,4 @@ build/
 ### VS Code ###
 .vscode/
 /src/main/java/com/example/springblog/env/
+/src/main/resources/application-prod.properties
