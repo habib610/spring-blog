@@ -142,4 +142,10 @@ public class PostServiceImpl implements PostServices {
         return postList.stream().map(post -> modelMapper.map(post, PostDto.class)).collect(Collectors.toList());
     }
 
+    @Override
+    public List<PostDto> getTopPosts() {
+        List<Post> postDtoList = postRepository.getPostByCommentsGreaterThan();
+        return postDtoList.stream().map(post -> modelMapper.map(post, PostDto.class)).collect(Collectors.toList());
+    }
+
 }

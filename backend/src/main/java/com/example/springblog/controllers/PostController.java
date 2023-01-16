@@ -1,5 +1,6 @@
 package com.example.springblog.controllers;
 
+import com.example.springblog.entities.Post;
 import com.example.springblog.payload.PostDto;
 import com.example.springblog.payload.PostResponse;
 import com.example.springblog.response.ApiResponse;
@@ -55,6 +56,13 @@ public class PostController {
     ) {
         PostResponse postDtoList = postServices.getAllPosts(pageNumber, pageSize, sort, order);
         return ResponseEntity.ok(postDtoList);
+    }
+
+//    Get Post ByPostId
+    @GetMapping("/posts/top")
+    public ResponseEntity<List<PostDto>> getTopPosts(){
+        List<PostDto> postResponse = postServices.getTopPosts();
+        return ResponseEntity.ok(postResponse);
     }
 
 
