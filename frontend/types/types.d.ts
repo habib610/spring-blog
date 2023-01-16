@@ -1,6 +1,8 @@
 export interface Comment {
     id: number;
     content: string;
+    userName: string;
+    userId: number;
 }
 export interface Role {
     id: number;
@@ -28,4 +30,13 @@ export interface Post {
     category: Category;
     users: User;
     comments: Comment[];
+}
+
+export interface StoryContent {
+    content: Post[];
+    pageNumber: number;
+    pageSize: number;
+    totalElements: number;
+    lastPage: boolean;
+    firstPage: boolean;
 }

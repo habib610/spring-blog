@@ -2,6 +2,7 @@ export const HOME = "/";
 export const LOGIN = "/login";
 export const REGISTRATION = "/registration";
 export const WRITE = "/write";
+
 export const links = [
     {
         id: 1,
@@ -24,3 +25,6 @@ export const links = [
         link: REGISTRATION,
     },
 ];
+
+// Endpoints
+export const ALL_POST_ENDPOINT = "api/posts";

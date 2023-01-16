@@ -11,7 +11,6 @@ import { HOME, links } from "../../constants/routes";
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const routes = useRouter();
-    console.log(routes);
     const isHidden =
         routes.pathname === "/login" || routes.pathname === "/registration";
     return (

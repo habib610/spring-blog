@@ -1,3 +1,7 @@
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
+import { useAppSelector } from "../../redux/app/hooks";
+import { getStory } from "../../redux/features/story/storyApi";
 import Title from "../global/Title";
 import VerticalCard from "../global/VerticalCard";
 
@@ -32,6 +36,8 @@ const POST = {
         {
             id: 1,
             content: "Comment 1",
+            userName: "HABIB",
+            userId: 1,
         },
     ],
 };
@@ -66,6 +72,8 @@ const POST2 = {
         {
             id: 1,
             content: "Comment 1",
+            userName: "HABIB",
+            userId: 1,
         },
     ],
 };
@@ -100,11 +108,25 @@ const POST3 = {
         {
             id: 1,
             content: "Comment 1",
+            userName: "HABIB",
+            userId: 1,
         },
     ],
 };
 
 const LatestBlog = () => {
+    useEffect(() => {
+        getStory(1);
+    }, []);
+    const { error, isError, isLoading, story } = useAppSelector(
+        (state) => state.story
+    );
+    const count = useSelector((state) => state);
+    console.log(count);
+    console.log(isError);
+    console.log(error);
+    console.log(story);
+    console.log(isLoading);
     return (
         <div>
             <Title title="Latest Stories" />
