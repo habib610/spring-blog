@@ -1,37 +1,56 @@
 {
-    "name": "frontend",
-    "version": "0.1.0",
-    "private": true,
-    "scripts": {
-        "dev": "next dev",
-        "build": "next build",
-        "start": "next start",
-        "lint": "next lint"
-    },
-    "dependencies": {
-        "@next/font": "13.1.1",
-        "@reduxjs/toolkit": "^1.9.1",
-        "@tailwindcss/line-clamp": "^0.4.2",
-        "@types/node": "18.11.18",
-        "@types/react": "^18.0.26",
-        "@types/react-dom": "^18.0.10",
-        "axios": "^1.2.2",
-        "eslint": "8.31.0",
-        "eslint-config-next": "13.1.1",
-        "framer-motion": "^8.3.4",
-        "jodit": "^3.24.2",
-        "jodit-react-ts": "^0.9.0",
-        "next": "13.1.1",
-        "react": "18.2.0",
-        "react-dom": "18.2.0",
-        "react-icons": "^4.7.1",
-        "react-redux": "^8.0.5",
-        "typescript": "4.9.4"
-    },
-    "packageManager": "yarn@1.22.19",
-    "devDependencies": {
-        "autoprefixer": "^10.4.13",
-        "postcss": "^8.4.21",
-        "tailwindcss": "^3.2.4"
-    }
+  "name": "frontend",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@reduxjs/toolkit": "^1.9.1",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^14.4.3",
+    "@types/jest": "^27.5.2",
+    "@types/node": "^17.0.45",
+    "@types/react": "^18.0.27",
+    "@types/react-dom": "^18.0.10",
+    "axios": "^1.2.3",
+    "framer-motion": "^8.5.0",
+    "jodit": "^3.24.2",
+    "jodit-react-ts": "^0.9.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-icons": "^4.7.1",
+    "react-redux": "^8.0.5",
+    "react-router-dom": "^6.7.0",
+    "react-scripts": "5.0.1",
+    "typescript": "^4.9.4",
+    "web-vitals": "^2.1.4"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.13",
+    "postcss": "^8.4.21",
+    "tailwindcss": "^3.2.4"
+  }
 }
