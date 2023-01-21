@@ -1,12 +1,23 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import Button from "../../components/global/Button";
 import Input from "../../components/global/Input";
+import Message from "../../components/global/Message";
 import images from "../../constants/images";
 import { HOME, REGISTRATION } from "../../constants/routes";
 import { validateUserLoginForm } from "../../helpers/validateFormData";
+import { useAppDispatch, useAppSelector } from "../../redux/app/hooks";
+import {
+    prepareUserLogin,
+    selectAuth,
+} from "../../redux/features/login/loginSlice";
 import { LoginFormData, LoginFormError } from "../../types/types";
+
 const Login = () => {
     const navigate = useNavigate();
+    const { error, isError, isLoading, token, user } =
+        useAppSelector(selectAuth);
+    const dispatch = useAppDispatch();
 
     const [formData, setFormData] = useState<LoginFormData>({
         email: "",
@@ -25,7 +36,7 @@ const Login = () => {
     };
 
     /* @DESC::  handling userLogin */
-    const handlerUserLogin = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    const handlerUserLogin = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
 
         const getValidData = validateUserLoginForm(formData);
@@ -37,12 +48,20 @@ const Login = () => {
                 password: formData.password,
             };
 
-            try {
-            } catch (error) {
-                console.log(error, "ERRHappeend");
-            }
+            dispatch(prepareUserLogin(reqData));
         }
     };
+
+    let showError = null;
+    if (isError) {
+        showError = <Message error={isError} message={error} />;
+    }
+
+    useEffect(() => {
+        if (user && token) {
+            navigate(HOME);
+        }
+    }, [navigate, token, user]);
 
     return (
         <div className="grid grid-cols-1 lg:grid-cols-2 min-h-screen">
@@ -89,22 +108,20 @@ const Login = () => {
                             </button>
                         </div>
 
-                        <button
+                        <Button
                             onClick={handlerUserLogin}
-                            className=" my-4 w-full bg-gray-600 hover:bg-black text-white py-2 px-4 font-bold rounded-md "
-                        >
-                            Sign In
-                        </button>
-
+                            title="Sign Up"
+                            loading={isLoading}
+                        />
                         <div className="flex items-center justify-center">
                             <p className="text-sm text-gray-600 mr-2">{`Don't Have Account?`}</p>{" "}
                             <button
                                 onClick={() => navigate(REGISTRATION)}
                                 className="text-primary-500 cursor-pointer font-semibold hover:underline transition"
-                            >
-                                Sign Up
-                            </button>
+                            ></button>
                         </div>
+
+                        {showError}
                     </div>
                 </div>
             </div>

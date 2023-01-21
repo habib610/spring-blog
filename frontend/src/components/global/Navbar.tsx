@@ -7,12 +7,32 @@ import { AiOutlineClose } from "react-icons/ai";
 import { HiMenuAlt4 } from "react-icons/hi";
 import images from "../../constants/images";
 import { HOME, links } from "../../constants/routes";
+import { useAppDispatch, useAppSelector } from "../../redux/app/hooks";
+import {
+    selectAuth,
+    userLoggedOut,
+} from "../../redux/features/login/loginSlice";
+import Avatar from "./Avatar";
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
 
     const { pathname } = useLocation();
     const isHidden = pathname === "/login" || pathname === "/registration";
+    const { user } = useAppSelector(selectAuth);
+    const dispatch = useAppDispatch();
+
+    let userAvatar = null;
+    if (user?.name) {
+        userAvatar = (
+            <Avatar
+                name={user?.name}
+                className="mx-2"
+                onClick={() => dispatch(userLoggedOut())}
+            />
+        );
+    }
+
     return (
         <nav>
             <div
@@ -34,56 +54,63 @@ const Navbar = () => {
                             </div>
                         </Link>
                     </div>
-                    <ul className="hidden md:flex flex-end items-center">
-                        {links.map((link) => (
-                            <li key={link.id}>
-                                <Link to={link.link}>
-                                    <span className="px-3 py-2 border-1 border-orange-50 font-semibold hover:text-white hover:bg-orange-400 text-white rounded-md">
-                                        {link.label}
-                                    </span>
-                                </Link>
-                            </li>
-                        ))}
-                    </ul>
 
-                    <div className="block md:hidden ">
-                        <button
-                            onClick={() => setIsOpen(true)}
-                            className="bg-orange-500 text-white h-[30px] w-[30px] flex items-center  justify-center rounded-full"
-                        >
-                            <HiMenuAlt4 className="text-xl" />
-                        </button>
-                        {isOpen && (
-                            <motion.div
-                                whileInView={{ x: [300, 0] }}
-                                transition={{ duration: 0.75, ease: "easeOut" }}
-                                exit={{ x: [-300, 0] }}
-                                className="fixed top-0 right-0 w-[80%] h-screen bg-orange-300"
+                    <div className="flex items-center md:flex-row-reverse">
+                        {userAvatar}
+                        <ul className="hidden md:flex flex-end items-center">
+                            {links.map((link) => (
+                                <li key={link.id}>
+                                    <Link to={link.link}>
+                                        <span className="px-3 py-2 border-1 border-orange-50 font-semibold hover:text-white hover:bg-orange-400 text-white rounded-md">
+                                            {link.label}
+                                        </span>
+                                    </Link>
+                                </li>
+                            ))}
+                        </ul>
+
+                        <div className="block md:hidden ">
+                            <button
+                                onClick={() => setIsOpen(true)}
+                                className="bg-orange-500 text-white h-[30px] w-[30px] flex items-center  justify-center rounded-full"
                             >
-                                <div className="flex justify-end mt-4 mx-4 m-3">
-                                    <button
-                                        onClick={() => setIsOpen(false)}
-                                        className="bg-orange-500 text-white h-[30px] w-[30px] flex  items-center justify-center rounded-full"
-                                    >
-                                        <AiOutlineClose />
-                                    </button>
-                                </div>
-                                <ul className="flex flex-col justify-start">
-                                    {links.map((link) => (
-                                        <li
-                                            key={link.id}
-                                            className="px-3 py-2 border-1 border-orange-50 font-semibold hover:text-white hover:bg-orange-400 w-100mb-2"
+                                <HiMenuAlt4 className="text-xl" />
+                            </button>
+                            {isOpen && (
+                                <motion.div
+                                    whileInView={{ x: [300, 0] }}
+                                    transition={{
+                                        duration: 0.75,
+                                        ease: "easeOut",
+                                    }}
+                                    exit={{ x: [-300, 0] }}
+                                    className="fixed top-0 right-0 w-[80%] h-screen bg-orange-300"
+                                >
+                                    <div className="flex justify-end mt-4 mx-4 m-3">
+                                        <button
+                                            onClick={() => setIsOpen(false)}
+                                            className="bg-orange-500 text-white h-[30px] w-[30px] flex  items-center justify-center rounded-full"
                                         >
-                                            <Link to={link.link}>
-                                                <span className="">
-                                                    {link.label}
-                                                </span>
-                                            </Link>
-                                        </li>
-                                    ))}
-                                </ul>
-                            </motion.div>
-                        )}
+                                            <AiOutlineClose />
+                                        </button>
+                                    </div>
+                                    <ul className="flex flex-col justify-start">
+                                        {links.map((link) => (
+                                            <li
+                                                key={link.id}
+                                                className="px-3 py-2 border-1 border-orange-50 font-semibold hover:text-white hover:bg-orange-400 w-100mb-2"
+                                            >
+                                                <Link to={link.link}>
+                                                    <span className="">
+                                                        {link.label}
+                                                    </span>
+                                                </Link>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </motion.div>
+                            )}
+                        </div>
                     </div>
                 </div>
             </div>

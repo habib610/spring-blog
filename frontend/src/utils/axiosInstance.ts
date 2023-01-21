@@ -1,7 +1,7 @@
 import axiosRoot from "axios";
 
 const axios = axiosRoot.create({
-    baseURL: process.env.NEXT_PUBLIC_API_BASE_URL,
+    baseURL: process.env.REACT_APP_BASE_API_URL,
     headers: {
         Accept: "*/*",
         "Content-Type": "application/json",

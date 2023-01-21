@@ -2,6 +2,7 @@ export const HOME = "/";
 export const LOGIN = "/login";
 export const REGISTRATION = "/registration";
 export const WRITE = "/write";
+export const localUser = "hrUser";
 
 export const links = [
     {
