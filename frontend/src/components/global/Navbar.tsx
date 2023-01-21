@@ -6,7 +6,7 @@ import { useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import { HiMenuAlt4 } from "react-icons/hi";
 import images from "../../constants/images";
-import { HOME, links } from "../../constants/routes";
+import { HOME, links, LOGIN, REGISTRATION } from "../../constants/routes";
 import { useAppDispatch, useAppSelector } from "../../redux/app/hooks";
 import {
     selectAuth,
@@ -18,7 +18,7 @@ const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
 
     const { pathname } = useLocation();
-    const isHidden = pathname === "/login" || pathname === "/registration";
+    const isHidden = pathname === LOGIN || pathname === REGISTRATION;
     const { user } = useAppSelector(selectAuth);
     const dispatch = useAppDispatch();
 

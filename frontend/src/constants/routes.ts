@@ -2,7 +2,7 @@ export const HOME = "/";
 export const LOGIN = "/login";
 export const REGISTRATION = "/registration";
 export const WRITE = "/write";
-export const localUser = "hrUser";
+export const UNAUTHORIZED = "/unauthorized";
 
 export const links = [
     {
@@ -31,3 +31,11 @@ export const links = [
 export const ALL_POST_ENDPOINT = "/api/posts";
 export const REGISTRATION_ENDPOINT = "/api/v1/auth/register";
 export const LOGIN_ENDPOINT = "/api/v1/auth/login";
+
+// USER ROLE
+export const ROLE_ADMIN = "ROLE_ADMIN";
+export const ROLE_USER = "ROLE_USER";
+export const ROLES = [ROLE_ADMIN, ROLE_USER];
+
+// Auth
+export const localUser = "hrUser";

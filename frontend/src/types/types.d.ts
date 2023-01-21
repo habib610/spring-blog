@@ -5,8 +5,8 @@ export interface Comment {
     userId: number;
 }
 export interface Role {
-    id: number;
-    name: string;
+    id?: number;
+    name?: string;
 }
 export interface User {
     id?: number;
