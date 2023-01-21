@@ -1,5 +1,6 @@
 package com.example.springblog.config;
 
+import com.example.springblog.repositories.CommentRepository;
 import com.example.springblog.security.CustomUserDetailsService;
 import com.example.springblog.security.JwtAuthenticationEntryPoint;
 import com.example.springblog.security.JwtAuthenticationFilter;
@@ -16,15 +17,13 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @Configuration
 @EnableWebSecurity
-@EnableWebMvc
-@EnableSwagger2
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true, jsr250Enabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+    @Autowired
+    private CommentRepository commentRepository;
 
     public static final String[] PUBLIC_URLS = {
             "/api/v1/auth/**",
@@ -33,13 +32,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             "/swagger-resources/**",
             "/swagger-ui/**",
             "/webjars/**",
+
     };
+
     @Autowired
     private CustomUserDetailsService customUserDetails;
     @Autowired
     private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
     @Autowired
     private JwtAuthenticationFilter jwtAuthenticationFilter;
+
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -73,4 +75,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
     }
+
+
 }
