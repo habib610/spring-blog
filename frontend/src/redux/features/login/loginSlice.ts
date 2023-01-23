@@ -9,15 +9,15 @@ interface UserRegistration {
     isError: boolean;
     isLoading: boolean;
     error: string | undefined;
-    token: string | undefined;
-    user: User | undefined;
+    token: string | null;
+    user: User | null;
 }
 const initialState: UserRegistration = {
     isError: false,
     isLoading: false,
-    user: {} as User,
+    user: null,
     error: "",
-    token: undefined,
+    token: null,
 };
 
 export const prepareUserLogin = createAsyncThunk(
@@ -31,10 +31,24 @@ const loginSlice = createSlice({
     name: "auth",
     initialState,
     reducers: {
+        userLoggedIn: (state, action) => {
+            state.user = action?.payload.user;
+            state.token = action?.payload.token;
+            localStorage.setItem(
+                localUser,
+                JSON.stringify({
+                    user: action?.payload?.user,
+                    token: action?.payload?.token,
+                })
+            );
+            axios.defaults.headers.common[
+                "Authorization"
+            ] = `Bearer ${action?.payload?.token}`;
+        },
         userLoggedOut: (state) => {
             localStorage.removeItem(localUser);
-            state.token = undefined;
-            state.user = undefined;
+            state.token = null;
+            state.user = null;
             delete axios.defaults.headers.common.Authorization;
         },
     },
@@ -77,5 +91,5 @@ const loginSlice = createSlice({
 });
 
 export const selectAuth = (state: RootState) => state.auth;
-export const { userLoggedOut } = loginSlice.actions;
+export const { userLoggedOut, userLoggedIn } = loginSlice.actions;
 export default loginSlice.reducer;

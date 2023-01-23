@@ -8,6 +8,7 @@ import {
     UNAUTHORIZED,
     WRITE,
 } from "./constants/routes";
+import useAuth from "./hooks/useAuth";
 import Home from "./pages/home";
 import Login from "./pages/login";
 import Registration from "./pages/registration";
@@ -16,7 +17,12 @@ import Write from "./pages/write";
 import PrivateOutlet from "./routes/PrivateOutlet";
 import PublicOutlet from "./routes/PublicOutlet";
 function App() {
-    return (
+    const checkAuth = useAuth();
+    return !checkAuth ? (
+        <div className="min-h-screen flex items-center justify-center text-center">
+            <h1 className="text-lg ">Checking Auth...</h1>
+        </div>
+    ) : (
         <div className="App">
             <Router>
                 <div>
