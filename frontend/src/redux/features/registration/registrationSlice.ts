@@ -1,21 +1,23 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { ERR_MSG } from "../../../constants/common";
 import { User } from "../../../types/types";
+import { RootState } from "../../app/store";
 import { createNewUser } from "./registrationApi";
 
 interface UserRegistration {
     isError: boolean;
     isLoading: boolean;
     error: string | undefined;
-    user: User;
+    user: User | null;
 }
 const initialState: UserRegistration = {
     isError: false,
     isLoading: false,
-    user: <User>{},
+    user: null,
     error: "",
 };
 
-const createUserSignup = createAsyncThunk(
+export const createUserSignup = createAsyncThunk(
     "registration/userRegistration",
     async (body: User) => {
         const user = createNewUser(body);
@@ -46,10 +48,12 @@ const registrationSlice = createSlice({
                 (state: UserRegistration, action) => {
                     state.isError = true;
                     state.isLoading = false;
-                    state.error = action.error?.message;
+                    state.error = action.error?.message || ERR_MSG;
+                    console.log(action.error, "ACTION");
                 }
             );
     },
 });
 
+export const selectRegistration = (state: RootState) => state.registration;
 export default registrationSlice.reducer;

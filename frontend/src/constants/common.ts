@@ -4,3 +4,4 @@ export const AVATAR_URL =
 export const FileSizeERR = "Image size must be under 150KB";
 export const FileInvalidERR =
     "File type must be: [image/jpeg, image/png, image/jpg]";
+export const ERR_MSG = "There is something went wrong!";

@@ -110,7 +110,7 @@ const Login = () => {
 
                         <Button
                             onClick={handlerUserLogin}
-                            title="Sign Up"
+                            title="Sign in"
                             loading={isLoading}
                         />
                         <div className="flex items-center justify-center">
@@ -118,7 +118,9 @@ const Login = () => {
                             <button
                                 onClick={() => navigate(REGISTRATION)}
                                 className="text-primary-500 cursor-pointer font-semibold hover:underline transition"
-                            ></button>
+                            >
+                                Sign up
+                            </button>
                         </div>
 
                         {showError}

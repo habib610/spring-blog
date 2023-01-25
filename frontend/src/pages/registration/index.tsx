@@ -1,13 +1,35 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import Button from "../../components/global/Button";
 import Input from "../../components/global/Input";
+import Message from "../../components/global/Message";
 import Textarea from "../../components/global/Textarea";
 import images from "../../constants/images";
 import { HOME, LOGIN } from "../../constants/routes";
 import { validateUserRegistrationForm } from "../../helpers/validateFormData";
+import { useAppDispatch, useAppSelector } from "../../redux/app/hooks";
+import {
+    prepareUserLogin,
+    selectAuth,
+} from "../../redux/features/login/loginSlice";
+import {
+    createUserSignup,
+    selectRegistration,
+} from "../../redux/features/registration/registrationSlice";
 import { RegistrationFormData, RegistrationFormError } from "../../types/types";
-
 const Registration = () => {
+    const [localError, setLocalErr] = useState("");
+    // Registration
+    const {
+        error: signUpError,
+        isError: isSignUpErr,
+        isLoading: isSignUpLoading,
+        user: newUser,
+    } = useAppSelector(selectRegistration);
+    // login
+    const { error, isError, isLoading, token, user } =
+        useAppSelector(selectAuth);
+    const dispatch = useAppDispatch();
     const navigate = useNavigate();
 
     const [formData, setFormData] = useState<RegistrationFormData>({
@@ -47,7 +69,7 @@ const Registration = () => {
     };
 
     /* @DESC::  handling userRegistration */
-    const handlerUserRegistration = (
+    const handlerUserRegistration = async (
         e: React.MouseEvent<HTMLButtonElement>
     ) => {
         e.preventDefault();
@@ -63,9 +85,34 @@ const Registration = () => {
                 password: formData.password,
             };
 
-            // createNewUser(formData);
+            await dispatch(createUserSignup(reqData));
         }
     };
+
+    let showError = null;
+    if (isSignUpErr || isError || localError) {
+        showError = (
+            <Message
+                error={isSignUpErr || isError}
+                message={signUpError || error || localError}
+            />
+        );
+    }
+    useEffect(() => {
+        if (newUser?.id) {
+            dispatch(
+                prepareUserLogin({
+                    username: formData.email,
+                    password: formData.password,
+                })
+            );
+        }
+    }, [dispatch, formData.email, formData.password, newUser?.id]);
+    useEffect(() => {
+        if (user && token) {
+            navigate(HOME);
+        }
+    }, [navigate, token, user]);
     return (
         <div className="grid grid-cols-1 lg:grid-cols-2 min-h-screen ">
             <div className="bg-slate-100 flex items-center justify-center py-8">
@@ -135,12 +182,11 @@ const Registration = () => {
                             </button>
                         </div>
 
-                        <button
+                        <Button
                             onClick={handlerUserRegistration}
-                            className=" my-4 w-full bg-gray-600 hover:bg-black text-white py-2 px-4 font-bold rounded-md "
-                        >
-                            Sign Up
-                        </button>
+                            title="Sign Up"
+                            loading={isLoading || isSignUpLoading}
+                        />
 
                         <div className="flex items-center justify-center">
                             <p className="text-sm text-gray-600 mr-2">{`Already Have Account?`}</p>{" "}
@@ -151,6 +197,7 @@ const Registration = () => {
                                 Sign In
                             </button>
                         </div>
+                        {showError}
                     </div>
                 </div>
             </div>

@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { ERR_MSG } from "../../../constants/common";
 import { localUser } from "../../../constants/routes";
 import { User } from "../../../types/types";
 import axios from "../../../utils/axiosInstance";
@@ -84,7 +85,7 @@ const loginSlice = createSlice({
                 (state: UserRegistration, action) => {
                     state.isError = true;
                     state.isLoading = false;
-                    state.error = action.error?.message;
+                    state.error = action.error?.message || ERR_MSG;
                 }
             );
     },
