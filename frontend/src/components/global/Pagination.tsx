@@ -41,7 +41,7 @@ const Pagination = ({
                         ? "text-gray-300 hover:cursor-not-allowed"
                         : "text-gray-600"
                 }
-                containerClassName=" border border-gray-100  shadow-sm flex  justify-between items-center px-4 rounded mt-10  text-gray-500"
+                containerClassName=" border border-gray-100 w-auto gap-2 shadow-sm flex  items-center px-4 rounded mt-10  text-gray-500"
                 pageClassName="px-4 py-2 border  rounded"
                 // renderOnZeroPageCount={null}
             />

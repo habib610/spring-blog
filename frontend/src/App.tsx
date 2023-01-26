@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Navbar from "./components/global/Navbar";
+import StoryPage from "./components/story/StoryPage";
 import {
     HOME,
     LOGIN,
@@ -42,6 +43,10 @@ function App() {
                         {/* DESC:: PRIVATE USER ROUTES */}
                         <Route element={<PrivateOutlet allowed={ROLE_USER} />}>
                             <Route path={WRITE} element={<Write />} />
+                            <Route
+                                path={`/story/:id`}
+                                element={<StoryPage />}
+                            />
                         </Route>
 
                         <Route path={UNAUTHORIZED} element={<UnAuthorized />} />

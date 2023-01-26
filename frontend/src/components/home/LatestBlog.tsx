@@ -80,7 +80,6 @@ const LatestBlog = () => {
         <div>
             <Title title="Latest Stories" />
             {showContent}
-
             <Pagination
                 pageCount={pageCount}
                 firstPage={firstPage}

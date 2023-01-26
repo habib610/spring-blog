@@ -35,13 +35,18 @@ const VerticalCard = ({ data }: IProps) => {
                         {data.content}
                     </p>
 
-                    <button className="bg-transparent outline-none border-none cursor-pointer text-rose-500  hover:cursor-pointer hover:underline transition-all my-3">
-                        Read more..
-                    </button>
+                    <Link to={`story/${data.id}`}>
+                        <button className="bg-transparent outline-none border-none cursor-pointer text-rose-500  hover:cursor-pointer hover:underline transition-all my-3">
+                            Read more..
+                        </button>
+                    </Link>
                 </div>
                 <div className="mt-auto flex items-end justify-between">
                     <div className="">
-                        <CategoryBtn name="Programming" color={PRIMARY} />
+                        <CategoryBtn
+                            name={data.category.categoryTitle}
+                            color={PRIMARY}
+                        />
                     </div>
                     <p className="text-gray-400  text-sm ">
                         Published:{" "}

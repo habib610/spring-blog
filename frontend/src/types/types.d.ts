@@ -29,7 +29,7 @@ export interface Post {
     addedDate: string;
     category: Category;
     users: User;
-    comments: Comment[];
+    comments: Comment[] | [];
 }
 
 export interface StoryContent {
