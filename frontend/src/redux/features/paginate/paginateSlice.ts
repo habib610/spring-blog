@@ -17,7 +17,7 @@ const paginateSlice = createSlice({
     initialState,
     reducers: {
         changePageNumber: (state, action) => {
-            state.pageNumber = action.payload?.pageNumber;
+            state.pageNumber = action.payload;
         },
     },
     extraReducers: (builder) => {
