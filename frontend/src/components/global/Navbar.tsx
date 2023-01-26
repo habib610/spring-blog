@@ -6,7 +6,13 @@ import { useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import { HiMenuAlt4 } from "react-icons/hi";
 import images from "../../constants/images";
-import { HOME, links, LOGIN, REGISTRATION } from "../../constants/routes";
+import {
+    authLinks,
+    HOME,
+    links,
+    LOGIN,
+    REGISTRATION,
+} from "../../constants/routes";
 import { useAppDispatch, useAppSelector } from "../../redux/app/hooks";
 import {
     selectAuth,
@@ -19,7 +25,7 @@ const Navbar = () => {
 
     const { pathname } = useLocation();
     const isHidden = pathname === LOGIN || pathname === REGISTRATION;
-    const { user } = useAppSelector(selectAuth);
+    const { user, token } = useAppSelector(selectAuth);
     const dispatch = useAppDispatch();
 
     let userAvatar = null;
@@ -32,6 +38,7 @@ const Navbar = () => {
             />
         );
     }
+    const navItems = user && token ? authLinks : links;
 
     return (
         <nav>
@@ -58,7 +65,7 @@ const Navbar = () => {
                     <div className="flex items-center md:flex-row-reverse">
                         {userAvatar}
                         <ul className="hidden md:flex flex-end items-center">
-                            {links.map((link) => (
+                            {navItems.map((link) => (
                                 <li key={link.id}>
                                     <Link to={link.link}>
                                         <span className="px-3 py-2 border-1 border-orange-50 font-semibold hover:text-white hover:bg-orange-400 text-white rounded-md">

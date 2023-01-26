@@ -11,11 +11,6 @@ export const links = [
         link: HOME,
     },
     {
-        id: 2,
-        label: "Write",
-        link: WRITE,
-    },
-    {
         id: 3,
         label: "Login",
         link: LOGIN,
@@ -24,6 +19,18 @@ export const links = [
         id: 4,
         label: "Signup",
         link: REGISTRATION,
+    },
+];
+export const authLinks = [
+    {
+        id: 1,
+        label: "Home",
+        link: HOME,
+    },
+    {
+        id: 2,
+        label: "Write",
+        link: WRITE,
     },
 ];
 
