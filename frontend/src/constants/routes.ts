@@ -38,6 +38,9 @@ export const authLinks = [
 export const ALL_POST_ENDPOINT = "/api/posts";
 export const REGISTRATION_ENDPOINT = "/api/v1/auth/register";
 export const LOGIN_ENDPOINT = "/api/v1/auth/login";
+export const LATEST_POST_ENDPOINT = "/api/posts";
+export const BLOG_IMAGE_ENDPOINT =
+    process.env.REACT_APP_BASE_API_URL + "/api/post/image/";
 
 // USER ROLE
 export const ROLE_ADMIN = "ROLE_ADMIN";

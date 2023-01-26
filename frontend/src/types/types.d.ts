@@ -64,3 +64,18 @@ export interface RegistrationFormError {
     passwordError?: string;
     confirmPasswordError?: string;
 }
+
+export type LatestStoryAPI = {
+    pageSize?: number;
+    pageNumber?: number;
+    sort?: string;
+    order?: string;
+};
+export type Paginate = {
+    pageNumber: number;
+    pageSize: number;
+    totalElements: number;
+    isLoading: boolean;
+    lastPage: boolean;
+    firstPage: boolean;
+};

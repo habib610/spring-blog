@@ -4,9 +4,9 @@ type ErrorProps = {
 const ErrorMessage = ({ message }: ErrorProps) => {
     return (
         <div>
-            {message && (
-                <p className="mt-1 mb-2 text-rose-500  text-sm">{message}</p>
-            )}
+            <p className="mt-1 mb-2 text-rose-500 bg-opacity-20  text-sm">
+                {message}
+            </p>
         </div>
     );
 };

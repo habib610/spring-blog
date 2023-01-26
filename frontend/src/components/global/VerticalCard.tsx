@@ -1,22 +1,24 @@
+import moment from "moment";
 import { Link } from "react-router-dom";
 import { AVATAR_URL } from "../../constants/common";
+import { BLOG_IMAGE_ENDPOINT } from "../../constants/routes";
 import { PRIMARY } from "../../constants/theme";
-import { POST } from "../../pages/story";
 import { Post } from "../../types/types";
 import CategoryBtn from "./CategoryBtn";
+
 import UserInfo from "./UserInfo";
 interface IProps {
     data: Post;
 }
 
-const VerticalCard = () => {
-    const data = POST;
+const VerticalCard = ({ data }: IProps) => {
+    const addedDate = moment(data.addedDate).format("DD MMM, YY");
     return (
         <div className=" bg-gray-50 rounded-md  shadow-md">
             <img
                 alt="blog_image"
                 className=" h-[200px] sm:h-[300px] object-cover w-full rounded-lg "
-                src={data.imageName}
+                src={BLOG_IMAGE_ENDPOINT + data?.imageName}
             />
             <div className=" px-3 pt-4 pb-2">
                 <div className=" flex flex-col items-start ">
@@ -43,7 +45,7 @@ const VerticalCard = () => {
                     </div>
                     <p className="text-gray-400  text-sm ">
                         Published:{" "}
-                        <span className="font-semibold">25 Jun 2022</span>
+                        <span className="font-semibold">{addedDate}</span>
                     </p>
                 </div>
             </div>
