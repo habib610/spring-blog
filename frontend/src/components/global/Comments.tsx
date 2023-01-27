@@ -1,10 +1,10 @@
 import Avatar from "./Avatar";
 
 interface IComment {
-    name: string;
+    name?: string;
     content: string;
 }
-const Comment = ({ name, content }: IComment) => {
+const Comments = ({ name, content }: IComment) => {
     return (
         <div className="flex items-start mb-6">
             <div className=" bg-gray-700 rounded-full text-lg font-bold text-white mr-3 flex items-center justify-center">
@@ -18,4 +18,4 @@ const Comment = ({ name, content }: IComment) => {
     );
 };
 
-export default Comment;
+export default Comments;

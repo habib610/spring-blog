@@ -1,5 +1,5 @@
 interface IProps {
-    name: string;
+    name?: string;
     size?: string;
     className?: string;
     textSize?: string;
@@ -24,7 +24,7 @@ const Avatar = ({
                 textSize
             }
         >
-            {name.charAt(0)}
+            {name?.charAt(0)}
         </button>
     );
 };

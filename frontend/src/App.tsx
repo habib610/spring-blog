@@ -1,4 +1,6 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Navbar from "./components/global/Navbar";
 import StoryPage from "./components/story/StoryPage";
 import {
@@ -25,6 +27,14 @@ function App() {
         </div>
     ) : (
         <div className="App">
+            <ToastContainer
+                hideProgressBar
+                limit={1}
+                position="bottom-left"
+                theme="dark"
+                closeButton={false}
+                // icon={false}
+            />
             <Router>
                 <div>
                     <Navbar />

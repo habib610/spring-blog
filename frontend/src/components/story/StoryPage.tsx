@@ -2,28 +2,34 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { ERR_MSG } from "../../constants/common";
 import { PRIMARY } from "../../constants/theme";
-import { Post } from "../../types/types";
+import { Comment, Post } from "../../types/types";
 import axios from "../../utils/axiosInstance";
 
 import moment from "moment";
+import { toast } from "react-toastify";
 import {
     ALL_POST_ENDPOINT,
     BLOG_IMAGE_ENDPOINT,
+    COMMENT_ENDPOINT,
     RELATED_POST_BY_CATEGORY_ENDPOINT,
 } from "../../constants/routes";
+import { useAppSelector } from "../../redux/app/hooks";
+import { selectAuth } from "../../redux/features/login/loginSlice";
 import Avatar from "../global/Avatar";
 import Button from "../global/Button";
 import CategoryBtn from "../global/CategoryBtn";
-import Comment from "../global/Comment";
+import Comments from "../global/Comments";
 import Container from "../global/Container";
 import Message from "../global/Message";
 import HorizontalLoader from "../loader/HorizontalLoader";
 import RecommendedCard from "./RecommendedCard";
 
 const StoryPage = () => {
+    const { user } = useAppSelector(selectAuth);
     /* @DESC::  Main Content State */
     const [data, setData] = useState<Post | null>(null);
     const [loading, setLoading] = useState(false);
+
     const [error, setError] = useState("");
 
     /* @DESC::  Related Content State */
@@ -55,27 +61,68 @@ const StoryPage = () => {
 
     /* @DESC::  ADD Comment */
     const [comment, setComment] = useState("");
+    const [cmntLoading, setCmntLoading] = useState(false);
 
     const postUserComment = async (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
 
-        let newComment = {
-            content: "I am using new Comment",
-            id: 165,
-            userId: 2,
-            userName: "Habib",
-        };
-        if (data?.comments) {
-            let tempObj = {
-                ...data,
-            };
-            tempObj.comments = [newComment, ...tempObj.comments];
+        if (comment && user?.name && user?.id) {
+            try {
+                setCmntLoading(true);
+                let body = {
+                    content: comment,
+                    userName: user?.name,
+                    userId: user?.id,
+                };
 
-            setData(tempObj);
-            // @TODO ==>   comment api integration Fri, Jan  27
+                const res = await (
+                    await axios.post(
+                        `${COMMENT_ENDPOINT}/${data?.id}/comment`,
+                        JSON.stringify(body)
+                    )
+                ).data;
+
+                if (data?.comments) {
+                    setData({
+                        ...data,
+                        comments: [res, ...data.comments].sort(
+                            (a, b) => b.id - a.id
+                        ),
+                    });
+                }
+
+                setCmntLoading(false);
+                toast.success("Comment posted!");
+                setComment("");
+            } catch (error: any) {
+                setCmntLoading(false);
+                toast.error(
+                    typeof error === "string"
+                        ? error
+                        : error?.message
+                        ? error?.message
+                        : ERR_MSG
+                );
+                setComment("");
+            }
         }
     };
-
+    const renderComments = (comments: Comment[]) => {
+        if (comments.length > 0) {
+            return comments
+                .sort((a, b) => a && b && a?.id - b?.id)
+                .slice(0, 5)
+                .map((item) => (
+                    <Comments
+                        key={item.id}
+                        content={item.content}
+                        name={data?.users.name}
+                    />
+                ));
+        } else {
+            return <Message message="No comments yet" />;
+        }
+    };
     // Main Content
     let showContent = null;
     if (loading) {
@@ -141,6 +188,8 @@ const StoryPage = () => {
                     <div className=" w-4/4 sm:w-3/4 ">
                         <div className="h-[100px]  ">
                             <textarea
+                                onChange={(e) => setComment(e.target.value)}
+                                value={comment}
                                 placeholder="Write your opinion"
                                 className="w-full h-full outline-none rounded-md  shadow-sm border-2 border-gray-200 px-2 py-3  appearance-none focus-within:border-blue-600"
                             />
@@ -149,6 +198,8 @@ const StoryPage = () => {
                             className="bg-transparent hover:text-white transition-all py-1 px-3 rounded-full my-3 w-6/6  sm:w-2/6 shadow-none text-black"
                             title="Comment"
                             onClick={postUserComment}
+                            loading={cmntLoading}
+                            disabled={!comment || cmntLoading}
                             bg="  hover:bg-gray-700 border border-gray-700 "
                         />
                     </div>
@@ -158,19 +209,7 @@ const StoryPage = () => {
                 <div className="my-8 border-b border-gray-300">
                     <h2 className="text-xl bl-2 font-semibold">Comments</h2>
                     <div className="ml-8 mt-4">
-                        <div>
-                            {data.comments.length > 0 ? (
-                                data.comments.map((item) => (
-                                    <Comment
-                                        key={item.id}
-                                        content={item.content}
-                                        name={data.users.name}
-                                    />
-                                ))
-                            ) : (
-                                <Message message="No comments yet" />
-                            )}
-                        </div>
+                        <div>{renderComments(data.comments)}</div>
                     </div>
                 </div>
             </div>

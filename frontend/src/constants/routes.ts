@@ -37,6 +37,7 @@ export const authLinks = [
 // Endpoints
 export const ALL_POST_ENDPOINT = "/api/posts";
 export const RELATED_POST_BY_CATEGORY_ENDPOINT = "/api/category";
+export const COMMENT_ENDPOINT = "/api/post";
 export const REGISTRATION_ENDPOINT = "/api/v1/auth/register";
 export const LOGIN_ENDPOINT = "/api/v1/auth/login";
 export const LATEST_POST_ENDPOINT = "/api/posts";
