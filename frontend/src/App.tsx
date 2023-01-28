@@ -2,7 +2,6 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Navbar from "./components/global/Navbar";
-import StoryPage from "./components/story/StoryPage";
 import {
     HOME,
     LOGIN,
@@ -15,6 +14,7 @@ import useAuth from "./hooks/useAuth";
 import Home from "./pages/home";
 import Login from "./pages/login";
 import Registration from "./pages/registration";
+import Story from "./pages/story";
 import UnAuthorized from "./pages/UnAuthorized";
 import Write from "./pages/write";
 import PrivateOutlet from "./routes/PrivateOutlet";
@@ -53,10 +53,7 @@ function App() {
                         {/* DESC:: PRIVATE USER ROUTES */}
                         <Route element={<PrivateOutlet allowed={ROLE_USER} />}>
                             <Route path={WRITE} element={<Write />} />
-                            <Route
-                                path={`/story/:id`}
-                                element={<StoryPage />}
-                            />
+                            <Route path={`/story/:id`} element={<Story />} />
                         </Route>
 
                         <Route path={UNAUTHORIZED} element={<UnAuthorized />} />

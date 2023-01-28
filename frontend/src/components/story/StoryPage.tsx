@@ -19,7 +19,6 @@ import Avatar from "../global/Avatar";
 import Button from "../global/Button";
 import CategoryBtn from "../global/CategoryBtn";
 import Comments from "../global/Comments";
-import Container from "../global/Container";
 import Message from "../global/Message";
 import HorizontalLoader from "../loader/HorizontalLoader";
 import RecommendedCard from "./RecommendedCard";
@@ -258,18 +257,14 @@ const StoryPage = () => {
     }
 
     return (
-        <Container>
-            <div className="mx-auto lg:w-10/12">
-                <div className="min-h-screen pt-24 ">
-                    <div>{showContent}</div>
+        <div className="min-h-screen pt-24 ">
+            <div>{showContent}</div>
 
-                    <h1 className="text-2xl font-semibold mt-16 my-4">
-                        Recommended For You
-                    </h1>
-                    {showRelatedContent}
-                </div>
-            </div>
-        </Container>
+            <h1 className="text-2xl font-semibold mt-16 my-4">
+                Recommended For You
+            </h1>
+            {showRelatedContent}
+        </div>
     );
 };
 

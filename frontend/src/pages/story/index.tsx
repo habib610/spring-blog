@@ -40,7 +40,7 @@ export const POST = {
     ],
 };
 
-const ReadContent = () => {
+const Story = () => {
     return (
         <>
             <div className="min-h-screen ">
@@ -59,4 +59,4 @@ const ReadContent = () => {
     );
 };
 
-export default ReadContent;
+export default Story;
