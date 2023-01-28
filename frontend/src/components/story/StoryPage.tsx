@@ -1,20 +1,16 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
 import { ERR_MSG } from "../../constants/common";
 import { PRIMARY } from "../../constants/theme";
-import { Comment, Post } from "../../types/types";
+import { Comment, Post, User } from "../../types/types";
 import axios from "../../utils/axiosInstance";
 
 import moment from "moment";
 import { toast } from "react-toastify";
 import {
-    ALL_POST_ENDPOINT,
     BLOG_IMAGE_ENDPOINT,
     COMMENT_ENDPOINT,
     RELATED_POST_BY_CATEGORY_ENDPOINT,
 } from "../../constants/routes";
-import { useAppSelector } from "../../redux/app/hooks";
-import { selectAuth } from "../../redux/features/login/loginSlice";
 import Avatar from "../global/Avatar";
 import Button from "../global/Button";
 import CategoryBtn from "../global/CategoryBtn";
@@ -22,41 +18,17 @@ import Comments from "../global/Comments";
 import Message from "../global/Message";
 import HorizontalLoader from "../loader/HorizontalLoader";
 import RecommendedCard from "./RecommendedCard";
-
-const StoryPage = () => {
-    const { user } = useAppSelector(selectAuth);
-    /* @DESC::  Main Content State */
-    const [data, setData] = useState<Post | null>(null);
-    const [loading, setLoading] = useState(false);
-
-    const [error, setError] = useState("");
-
+interface IProps {
+    data: Post | null;
+    loading: boolean;
+    error: string;
+    setData: Function;
+    user: User | null;
+}
+const StoryPage = ({ data, loading, error, setData, user }: IProps) => {
     /* @DESC::  Related Content State */
     const [related, setRelated] = useState<Post[] | []>([]);
     const [relatedLoading, setRelatedLoading] = useState(false);
-
-    const { id } = useParams();
-
-    useEffect(() => {
-        const fetchFullStory = async () => {
-            setLoading(true);
-            setError("");
-            try {
-                setLoading(true);
-                const fullStory = await (
-                    await axios.get(`${ALL_POST_ENDPOINT}/${id}`)
-                ).data;
-                setData(fullStory);
-                setLoading(false);
-                setError("");
-            } catch (error: any) {
-                setError(error?.message || ERR_MSG);
-                setLoading(false);
-            }
-        };
-
-        fetchFullStory();
-    }, [id]);
 
     /* @DESC::  ADD Comment */
     const [comment, setComment] = useState("");
@@ -109,7 +81,7 @@ const StoryPage = () => {
     const renderComments = (comments: Comment[]) => {
         if (comments.length > 0) {
             return comments
-                .sort((a, b) => a && b && a?.id - b?.id)
+                .sort((a, b) => b?.id - a?.id)
                 .slice(0, 5)
                 .map((item) => (
                     <Comments
@@ -140,7 +112,7 @@ const StoryPage = () => {
                         <div className=" mr-3 ">
                             <Avatar
                                 size="h-16 w-16 md:h-16 md:w-16 bg-rose-700"
-                                name={data.title}
+                                name={data.users.name}
                                 textSize=" text-2xl  lg:text-4xl"
                             />
                         </div>
@@ -226,7 +198,11 @@ const StoryPage = () => {
                             `${RELATED_POST_BY_CATEGORY_ENDPOINT}/${data?.category?.categoryId}/posts`
                         )
                     ).data;
-                    setRelated(fullStory.slice(0, 4));
+                    setRelated(
+                        fullStory
+                            .filter((item: any) => item.id !== data.id)
+                            .slice(0, 4)
+                    );
                     setRelatedLoading(false);
                 } catch (error: any) {
                     setRelatedLoading(false);
@@ -235,7 +211,7 @@ const StoryPage = () => {
         };
 
         fetchRelated();
-    }, [data?.category?.categoryId]);
+    }, [data?.category?.categoryId, data?.id]);
 
     let showRelatedContent = null;
     if (relatedLoading) {
