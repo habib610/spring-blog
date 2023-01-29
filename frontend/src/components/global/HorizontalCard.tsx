@@ -37,9 +37,10 @@ const HorizontalCard = () => {
                         </div>
                     </div>
                     {/* bottom Text */}
-                    <p className="text-md text-gray-500 my-2 line-clamp-2">
-                        {data.content}
-                    </p>
+                    <div
+                        dangerouslySetInnerHTML={{ __html: data.content }}
+                        className="text-md text-gray-500 my-2 line-clamp-2"
+                    ></div>
 
                     <button className="bg-transparent outline-none border-none cursor-pointer text-rose-500 mt-2 hover:cursor-pointer hover:underline transition-all ">
                         Read more..

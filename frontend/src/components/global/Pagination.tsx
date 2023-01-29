@@ -20,7 +20,8 @@ const Pagination = ({
                 pageRangeDisplayed={4}
                 pageCount={pageCount}
                 previousLabel="prev"
-                activeClassName="bg-gray-700 font-bold text-white px-4 py-2"
+                activeClassName="bg-gray-700 font-bold text-white "
+                pageLinkClassName="px-4 py-2 "
                 nextLinkClassName={
                     lastPage
                         ? "text-gray-300 hover:cursor-not-allowed"
@@ -42,7 +43,7 @@ const Pagination = ({
                         : "text-gray-600"
                 }
                 containerClassName=" border border-gray-100 w-auto gap-2 shadow-sm flex  items-center px-4 rounded mt-10  text-gray-500"
-                pageClassName="px-4 py-2 border  rounded"
+                pageClassName="border  rounded py-1"
                 // renderOnZeroPageCount={null}
             />
         </div>

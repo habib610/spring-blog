@@ -150,9 +150,9 @@ const StoryPage = ({ data, loading, error, setData, user }: IProps) => {
                 </div>
 
                 <div className="pb-12 ">
-                    <p className="text-xl leading-10 font-normal text-gray-600 mt-8">
-                        {data.content}
-                    </p>
+                    <div
+                        dangerouslySetInnerHTML={{ __html: data.content }}
+                    ></div>
                 </div>
                 {/* Comment Box */}
                 <div className="bg-gray-100 p-8">

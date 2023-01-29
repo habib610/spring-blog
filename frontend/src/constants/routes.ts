@@ -36,15 +36,20 @@ export const authLinks = [
 
 // Endpoints
 export const ALL_POST_ENDPOINT = "/api/posts";
+// /1/category/1/posts
+export const CREATE_POST_ENDPOINT = "/api/user";
+export const UPLOAD_IMAGE_POST_ENDPOINT = "/api/posts/image/upload";
 export const RELATED_POST_BY_CATEGORY_ENDPOINT = "/api/category";
 export const COMMENT_ENDPOINT = "/api/post";
-// /1/posts
+
 export const GET_SIMILAR_USER_POST_ENDPOINT = "/api/users";
 export const REGISTRATION_ENDPOINT = "/api/v1/auth/register";
 export const LOGIN_ENDPOINT = "/api/v1/auth/login";
 export const LATEST_POST_ENDPOINT = "/api/posts";
 export const BLOG_IMAGE_ENDPOINT =
     process.env.REACT_APP_BASE_API_URL + "/api/post/image/";
+export const CATEGORY_ENDPOINT =
+    process.env.REACT_APP_BASE_API_URL + "/api/category/";
 
 // USER ROLE
 export const ROLE_ADMIN = "ROLE_ADMIN";

@@ -13,9 +13,13 @@ const errorStyle = `flex items-center justify-center px-4 py-1 border border-err
 outline-none  transition-all hover:text-blue-700 hover:shadow-sm active:shadow-md
 hover:border-blue-500 `;
 
-const Upload = () => {
-    const [image, setImage] = useState<File | null>(null);
-    const [preview, setPreview] = useState<string>("");
+interface IProps {
+    onChange: any;
+    preview: string;
+    setPreview: Function;
+}
+
+const Upload = ({ onChange, preview, setPreview }: IProps) => {
     const [uploadError, setUploadError] = useState<string>("");
 
     const fileUploadHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -24,11 +28,13 @@ const Upload = () => {
         if (!IMAGE_TYPE.includes(selected.type)) {
             setUploadError(FileInvalidERR);
             setPreview("");
+            onChange(null);
         } else if (selected.size >= IMAGE_SIZE) {
             setUploadError(FileSizeERR);
             setPreview("");
+            onChange(null);
         } else {
-            setImage(selected);
+            onChange(selected);
             setPreview(URL.createObjectURL(selected));
             setUploadError("");
         }
@@ -39,7 +45,7 @@ const Upload = () => {
     };
 
     const clearFileHandler = () => {
-        setImage(null);
+        onChange(null);
         setPreview("");
         setUploadError("");
     };

@@ -4,6 +4,8 @@ import {
     LoginFormError,
     RegistrationFormData,
     RegistrationFormError,
+    StoryForm,
+    StoryFormError,
 } from "../types/types";
 
 export const validateUserRegistrationForm = (values: RegistrationFormData) => {
@@ -50,6 +52,23 @@ export const validateUserLoginForm = (values: LoginFormData) => {
     }
     if (!values.password) {
         errors.passwordError = "Password is required!";
+    }
+
+    return errors;
+};
+export const validateStoryUploadForm = (values: StoryForm) => {
+    const errors = {} as StoryFormError;
+    if (!values.title) {
+        errors.titleError = "Title is required!";
+    } else if (values.title.length < 5 || values.title.length > 150) {
+        errors.titleError =
+            "Title size must be min 5 chars and max is 150 chars";
+    }
+    if (!values.content) {
+        errors.contentError = "Description is required!";
+    } else if (values.content.length < 5 || values.content.length > 10000) {
+        errors.contentError =
+            "Content size must be min 5 chars and max is 10000 chars";
     }
 
     return errors;

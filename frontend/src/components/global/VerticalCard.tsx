@@ -31,9 +31,10 @@ const VerticalCard = ({ data }: IProps) => {
                         </Link>
                     </div>
                     {/* bottom Text */}
-                    <p className="text-md text-gray-500 mb-2 line-clamp-2">
-                        {data.content}
-                    </p>
+                    <div
+                        dangerouslySetInnerHTML={{ __html: data.content }}
+                        className="text-md text-gray-500 mb-2 line-clamp-2"
+                    ></div>
 
                     <Link to={`story/${data.id}`}>
                         <button className="bg-transparent outline-none border-none cursor-pointer text-rose-500  hover:cursor-pointer hover:underline transition-all my-3">

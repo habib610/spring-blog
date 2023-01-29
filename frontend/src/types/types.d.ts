@@ -57,6 +57,14 @@ export interface LoginFormError {
     emailError: string;
     passwordError: string;
 }
+export interface StoryFormError {
+    titleError: string;
+    contentError: string;
+}
+export interface StoryForm {
+    title: string;
+    content: string;
+}
 export interface RegistrationFormError {
     nameError?: string;
     emailError?: string;

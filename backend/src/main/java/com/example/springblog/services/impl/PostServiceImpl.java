@@ -48,7 +48,8 @@ public class PostServiceImpl implements PostServices {
         Users user = userRepository.findById(userId).orElseThrow(() -> new ResourceNotFoundException("User", "id", userId));
 
         Post post = modelMapper.map(postDto, Post.class);
-        post.setImageName("default.jpg");
+
+//        post.setImageName("default.jpg");
         post.setAddedDate(new Date());
         post.setUsers(user);
         post.setCategory(category.get());

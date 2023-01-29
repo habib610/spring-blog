@@ -5,3 +5,4 @@ export const FileSizeERR = "Image size must be under 150KB";
 export const FileInvalidERR =
     "File type must be: [image/jpeg, image/png, image/jpg]";
 export const ERR_MSG = "There is something went wrong!";
+export const POST_PUBLISHED = "Your post has been published!";
