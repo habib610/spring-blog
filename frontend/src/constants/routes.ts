@@ -1,7 +1,18 @@
+import { BsListTask } from "react-icons/bs";
+import { CgProfile } from "react-icons/cg";
+import { FiUsers } from "react-icons/fi";
+import { RxDashboard } from "react-icons/rx";
+
 export const HOME = "/";
 export const LOGIN = "/login";
 export const REGISTRATION = "/registration";
 export const WRITE = "/write";
+
+export const DASHBOARD = "/dashboard";
+export const PROFILE = "/profile";
+export const CATEGORY = "/category";
+export const USERS = "/users";
+
 export const UNAUTHORIZED = "/unauthorized";
 
 export const links = [
@@ -31,6 +42,36 @@ export const authLinks = [
         id: 2,
         label: "Write",
         link: WRITE,
+    },
+];
+
+export const menuLinks = [
+    {
+        id: 1,
+        label: "Dashboard",
+        link: DASHBOARD,
+        isAdmin: true,
+        icon: RxDashboard,
+    },
+    {
+        id: 2,
+        label: "Category",
+        link: CATEGORY,
+        isAdmin: true,
+        icon: BsListTask,
+    },
+    {
+        id: 3,
+        label: "Profile",
+        link: PROFILE,
+        icon: CgProfile,
+    },
+    {
+        id: 4,
+        label: "Users",
+        link: USERS,
+        icon: FiUsers,
+        isAdmin: true,
     },
 ];
 

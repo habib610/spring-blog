@@ -2,8 +2,10 @@ import { motion } from "framer-motion";
 
 import { Link, useLocation } from "react-router-dom";
 
-import { useState } from "react";
+import { Menu } from "@headlessui/react";
+import { Fragment, useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
+import { CiLogout } from "react-icons/ci";
 import { HiMenuAlt4 } from "react-icons/hi";
 import images from "../../constants/images";
 import {
@@ -11,6 +13,7 @@ import {
     HOME,
     links,
     LOGIN,
+    menuLinks,
     REGISTRATION,
 } from "../../constants/routes";
 import { useAppDispatch, useAppSelector } from "../../redux/app/hooks";
@@ -18,7 +21,6 @@ import {
     selectAuth,
     userLoggedOut,
 } from "../../redux/features/login/loginSlice";
-import Avatar from "./Avatar";
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -30,13 +32,7 @@ const Navbar = () => {
 
     let userAvatar = null;
     if (user?.name) {
-        userAvatar = (
-            <Avatar
-                name={user?.name}
-                className="mx-2"
-                onClick={() => dispatch(userLoggedOut())}
-            />
-        );
+        userAvatar = <UserMenu />;
     }
     const navItems = user && token ? authLinks : links;
 
@@ -126,3 +122,54 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
+function UserMenu() {
+    const { user } = useAppSelector(selectAuth);
+    const dispatch = useAppDispatch();
+    return (
+        <div className="relative">
+            <Menu as="span" className="z-10 inline-block p-0 mx-2">
+                <Menu.Button className="inline-block">
+                    <div>
+                        <div className="w-8 h-8 md:w-10 md:h-10  text-lg md:text-xl  rounded-full text-white bg-blue-400 flex items-center justify-center  font-bold uppercase ">
+                            {user?.name.charAt(0)}
+                        </div>
+                    </div>
+                </Menu.Button>
+                <Menu.Items className="flex flex-col absolute right-0  ">
+                    {menuLinks.map(({ link, label, id, icon: Icon }) => (
+                        /* Use the `active` state to conditionally style the active item. */
+                        <Menu.Item key={link} as={Fragment}>
+                            {({ active }) => (
+                                <Link
+                                    to={link}
+                                    className={`${
+                                        active
+                                            ? "bg-blue-500 text-white "
+                                            : "bg-white text-black  "
+                                    }`}
+                                >
+                                    <div className="flex items-center py-2 px-3">
+                                        <Icon className="mr-2" />
+                                        <div className="">{label}</div>
+                                    </div>
+                                </Link>
+                            )}
+                        </Menu.Item>
+                    ))}
+
+                    <Menu.Item>
+                        <div
+                            onClick={() => dispatch(userLoggedOut())}
+                            role="button"
+                            className="flex items-center py-2 px-3 bg-white text-black hover:bg-rose-500 border-b hover:text-white hover:cursor-pointer"
+                        >
+                            <CiLogout className="mr-2" />
+                            <div className="">Signout</div>
+                        </div>
+                    </Menu.Item>
+                </Menu.Items>
+            </Menu>
+        </div>
+    );
+}
