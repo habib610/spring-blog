@@ -59,7 +59,7 @@ public class PostController {
         return ResponseEntity.ok(postDtoList);
     }
 
-//    Get Top posts ByPostId
+//    Get Top posts
     @GetMapping("/posts/top")
     public ResponseEntity<List<PostDto>> getTopPosts(){
         List<PostDto> postResponse = postServices.getTopPosts();

@@ -15,6 +15,6 @@ public interface PostRepository extends JpaRepository<Post, Long> {
     List<Post> getAllByCategory(Category category);
     List<Post> getByTitleContaining(String keyword);
 
-    @Query(value = "SELECT * FROM comment c group by c.post ", nativeQuery = true)
+    @Query(value = "SELECT * FROM post where post.comment > 3", nativeQuery = true)
     List<Post> getPostByCommentsGreaterThan();
 }
