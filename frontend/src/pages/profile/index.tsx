@@ -13,7 +13,6 @@ const Profile = () => {
 
                     {/* USER POST */}
                     <MyPosts />
-                    <h1>hello </h1>
                 </div>
             </Container>
         </div>

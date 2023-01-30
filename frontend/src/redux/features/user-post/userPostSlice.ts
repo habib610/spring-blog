@@ -24,10 +24,17 @@ export const getUserAllPosts = createAsyncThunk(
         return post;
     }
 );
+
 const userPostSlice = createSlice({
     name: "userPosts",
     initialState,
-    reducers: {},
+    reducers: {
+        deleteAPost: (state, action) => {
+            state.content = state.content.filter(
+                (item) => item.id !== action.payload.id
+            );
+        },
+    },
     extraReducers: (builder) => {
         builder
             .addCase(getUserAllPosts.pending, (state: UserPosts) => {
@@ -47,6 +54,6 @@ const userPostSlice = createSlice({
             });
     },
 });
-
+export const { deleteAPost } = userPostSlice.actions;
 export const selectUserPost = (state: RootState) => state.userPosts;
 export default userPostSlice.reducer;
