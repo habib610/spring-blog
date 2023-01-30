@@ -9,18 +9,24 @@ import Title from "../../components/global/Title";
 import Upload from "../../components/global/Upload";
 import { ERR_MSG, POST_PUBLISHED } from "../../constants/common";
 import {
-    CATEGORY_ENDPOINT,
     CREATE_POST_ENDPOINT,
     UPLOAD_IMAGE_POST_ENDPOINT,
 } from "../../constants/routes";
 import { validateStoryUploadForm } from "../../helpers/validateFormData";
-import { useAppSelector } from "../../redux/app/hooks";
+import { useAppDispatch, useAppSelector } from "../../redux/app/hooks";
+import {
+    getCategory,
+    selectCategory,
+} from "../../redux/features/categories/categorySlice";
 import { selectAuth } from "../../redux/features/login/loginSlice";
-import { Category, StoryForm, StoryFormError } from "../../types/types";
+import { StoryForm, StoryFormError } from "../../types/types";
 import axios from "../../utils/axiosInstance";
 
 const Write = () => {
+    const { categories, error, isError, isLoading } =
+        useAppSelector(selectCategory);
     const { user } = useAppSelector(selectAuth);
+    const dispatch = useAppDispatch();
     const [categoryId, setCategoryId] = useState<null | string | number>(null);
     const [storyImage, setStoryImage] = useState(null);
     const [preview, setPreview] = useState<string>("");
@@ -35,47 +41,21 @@ const Write = () => {
     });
 
     /* @DESC::  Fetch Category */
-    const [loading, setLoading] = useState(false);
-    const [categories, setCategories] = useState<Category[] | []>([]);
-    const [error, setError] = useState("");
 
     const [postLoading, setPostLoading] = useState(false);
     const [postError, setPostError] = useState("");
     useEffect(() => {
-        const fetchData = async () => {
-            setLoading(true);
-            setError("");
-            try {
-                setLoading(true);
-                const res: Category[] = await (
-                    await axios.get(CATEGORY_ENDPOINT)
-                ).data;
-                setCategories(res);
-                setLoading(false);
-                setError("");
-                setCategoryId(res[0].categoryId);
-            } catch (error: any) {
-                setError(
-                    typeof error === "string"
-                        ? error
-                        : error?.message
-                        ? error?.message
-                        : ERR_MSG
-                );
-                setLoading(false);
-            }
-        };
-        fetchData();
-    }, []);
+        dispatch(getCategory());
+    }, [dispatch]);
 
     let showCategories = null;
-    if (loading)
+    if (isLoading)
         showCategories = (
             <div className="h-16 bg-slate-200 animate-pulse"></div>
         );
-    if (!loading && error)
-        showCategories = <Message error={true} message={error} />;
-    if (!loading && categories.length > 0 && !error)
+    if (!isLoading && error)
+        showCategories = <Message error={isError} message={error} />;
+    if (!isLoading && categories.length > 0 && !error)
         showCategories = (
             <select
                 onChange={(event) => setCategoryId(event.target.value)}
@@ -92,11 +72,10 @@ const Write = () => {
                 ))}
             </select>
         );
-    if (!loading && categories.length === 0 && !error)
+    if (!isLoading && categories.length === 0 && !error)
         showCategories = <Message message={"Categories not available"} />;
 
     /* @DESC::  handle post */
-    /* @DESC::  handling userLogin */
     const handlePublishPost = async (
         e: React.MouseEvent<HTMLButtonElement>
     ) => {
@@ -159,7 +138,7 @@ const Write = () => {
     };
 
     const buttonDisabled =
-        loading || postLoading || !formData.title || !formData.content;
+        isLoading || postLoading || !formData.title || !formData.content;
     return (
         <Container>
             <div className="flex w-full justify-center">
@@ -221,8 +200,6 @@ const Write = () => {
                     hover:border-black rounded-full hover:bg-black hover:text-white font-semibold w-full shadow-none bg-transparent
                      text-gray-600 disabled:cursor-not-allowed"
                         />
-                        {/* Publish
-                        </Button> */}
                     </div>
                 </div>
             </div>

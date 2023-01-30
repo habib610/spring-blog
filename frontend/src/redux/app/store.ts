@@ -1,4 +1,5 @@
 import { Action, configureStore, ThunkAction } from "@reduxjs/toolkit";
+import categoryReducer from "../features/categories/categorySlice";
 import latestReducer from "../features/latest/latestSlice";
 import loginReducer from "../features/login/loginSlice";
 import paginateReducer from "../features/paginate/paginateSlice";
@@ -12,6 +13,7 @@ export const store = configureStore({
         latest: latestReducer,
         userPosts: userPostReducer,
         paginate: paginateReducer,
+        category: categoryReducer,
     },
     devTools: process.env.NODE_ENV !== "production",
 });

@@ -89,6 +89,7 @@ export const REGISTRATION_ENDPOINT = "/api/v1/auth/register";
 export const LOGIN_ENDPOINT = "/api/v1/auth/login";
 export const LATEST_POST_ENDPOINT = "/api/posts";
 export const DELETE_POST_ENDPOINT = "/api/posts";
+export const UPDATE_POST_ENDPOINT = "/api/posts";
 export const BLOG_IMAGE_ENDPOINT =
     process.env.REACT_APP_BASE_API_URL + "/api/post/image/";
 export const CATEGORY_ENDPOINT =
