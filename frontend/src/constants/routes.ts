@@ -65,6 +65,7 @@ export const menuLinks = [
         label: "Profile",
         link: PROFILE,
         icon: CgProfile,
+        isAdmin: false,
     },
     {
         id: 4,

@@ -5,6 +5,7 @@ import Navbar from "./components/global/Navbar";
 import {
     HOME,
     LOGIN,
+    PROFILE,
     REGISTRATION,
     ROLE_USER,
     UNAUTHORIZED,
@@ -13,6 +14,7 @@ import {
 import useAuth from "./hooks/useAuth";
 import Home from "./pages/home";
 import Login from "./pages/login";
+import Profile from "./pages/profile";
 import Registration from "./pages/registration";
 import Story from "./pages/story";
 import UnAuthorized from "./pages/UnAuthorized";
@@ -52,6 +54,7 @@ function App() {
 
                         {/* DESC:: PRIVATE USER ROUTES */}
                         <Route element={<PrivateOutlet allowed={ROLE_USER} />}>
+                            <Route path={PROFILE} element={<Profile />} />
                             <Route path={WRITE} element={<Write />} />
                             <Route path={`/story/:id`} element={<Story />} />
                         </Route>

@@ -163,7 +163,7 @@ const Write = () => {
     return (
         <Container>
             <div className="flex w-full justify-center">
-                <div className="  h-full pt-24 lg:w-8/12 ">
+                <div className="h-full pt-24 lg:w-8/12 ">
                     <div className="border-b-2  mb-16">
                         <Title title="Write your own story" />
                     </div>
