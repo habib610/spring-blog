@@ -90,8 +90,6 @@ const Category = () => {
             <div className="h-full pt-24 ">
                 <div className="flex flex-col-reverse lg:flex-row ">
                     <div className="lg:w-3/4 py-8 px-3 lg:px-3 lg:py-3">
-                        {/* @DESC::  CATEGORY */}
-
                         <div className="flex font-extrabold items-center gap-5 text-3xl text-gray-600 capitalize pb-9 border-b border-gray-200 mb-9">
                             <SiOpenbadges />
 

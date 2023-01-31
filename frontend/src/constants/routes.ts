@@ -7,6 +7,7 @@ export const HOME = "/";
 export const LOGIN = "/login";
 export const REGISTRATION = "/registration";
 export const WRITE = "/write";
+export const SEARCH = "/search";
 
 export const DASHBOARD = "/dashboard";
 export const PROFILE = "/profile";
@@ -83,6 +84,7 @@ export const CREATE_POST_ENDPOINT = "/api/user";
 export const UPLOAD_IMAGE_POST_ENDPOINT = "/api/posts/image/upload";
 export const RELATED_POST_BY_CATEGORY_ENDPOINT = "/api/category";
 export const COMMENT_ENDPOINT = "/api/post";
+export const SEARCH_POST_ENDPOINT = "/api/posts/search";
 
 export const GET_SIMILAR_USER_POST_ENDPOINT = "/api/users";
 export const REGISTRATION_ENDPOINT = "/api/v1/auth/register";

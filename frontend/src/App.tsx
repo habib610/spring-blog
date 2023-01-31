@@ -9,6 +9,7 @@ import {
     PROFILE,
     REGISTRATION,
     ROLE_USER,
+    SEARCH,
     UNAUTHORIZED,
     WRITE,
 } from "./constants/routes";
@@ -18,6 +19,7 @@ import Home from "./pages/home";
 import Login from "./pages/login";
 import Profile from "./pages/profile";
 import Registration from "./pages/registration";
+import Search from "./pages/search";
 import Story from "./pages/story";
 import UnAuthorized from "./pages/UnAuthorized";
 import Write from "./pages/write";
@@ -63,6 +65,7 @@ function App() {
                             />
                             <Route path={WRITE} element={<Write />} />
                             <Route path={`/story/:id`} element={<Story />} />
+                            <Route path={SEARCH} element={<Search />} />
                         </Route>
 
                         <Route path={UNAUTHORIZED} element={<UnAuthorized />} />
