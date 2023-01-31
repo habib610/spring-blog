@@ -1,5 +1,13 @@
-import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../../redux/app/hooks";
+import {
+    getCategory,
+    selectCategory,
+} from "../../redux/features/categories/categorySlice";
+import Message from "./Message";
 import Title from "./Title";
+
 const Sidebar = () => {
     return (
         <div className="w-full h-full py-8 px-3 lg:px-3 lg:py-3">
@@ -12,27 +20,47 @@ const Sidebar = () => {
 export default Sidebar;
 
 const CategoryButton = () => {
+    const { catId } = useParams();
     const router = useNavigate();
-    return (
-        <div>
-            {[
-                "Programing",
-                "Data Structure",
-                "Algorithm",
-                "Database",
-                "Architecture",
-                "Science",
-                "Java",
-                "JavaScript",
-            ].map((item) => (
-                <button
-                    key={item}
-                    className="text-sm rounded-md text-gray-500 px-2 py-1 mt-2 ml-1 bg-transparent outline-none border border-gray-300 hover:cursor-pointer hover:border-blue-500 transition-all hover:text-blue-500"
-                    onClick={() => router(`/category/${item}`)}
-                >
-                    {item}
-                </button>
-            ))}
-        </div>
-    );
+    const { categories, error, isError, isLoading } =
+        useAppSelector(selectCategory);
+
+    const dispatch = useAppDispatch();
+
+    useEffect(() => {
+        if (categories.length === 0) {
+            dispatch(getCategory());
+        }
+    }, [categories.length, dispatch]);
+
+    const handleCategory = (id: number) => {
+        router(`/category/${id}`);
+    };
+
+    let showCategory = null;
+    if (isLoading)
+        showCategory = <div className="h-16 bg-slate-200 animate-pulse"></div>;
+    if (!isLoading && error)
+        showCategory = <Message error={isError} message={error} />;
+    if (!isLoading && categories.length > 0 && !error) {
+        const regularStyle =
+            "text-sm rounded-md text-gray-500 px-2 py-1 mt-2 ml-1 bg-transparent outline-none border border-gray-300 hover:cursor-pointer hover:border-blue-500 transition-all hover:text-blue-500";
+        const activeStyle =
+            "text-sm rounded-md text-blue-500 px-2 py-1 mt-2 ml-1 bg-transparent outline-none border border-blue-300 hover:cursor-pointer hover:border-blue-500 transition-all hover:text-blue-500";
+        showCategory = categories.map((item) => (
+            <button
+                key={item.categoryId}
+                className={
+                    catId && Number(catId) === item.categoryId
+                        ? activeStyle
+                        : regularStyle
+                }
+                onClick={() => handleCategory(item.categoryId)}
+            >
+                {item.categoryTitle}
+            </button>
+        ));
+    }
+
+    return <div>{showCategory}</div>;
 };

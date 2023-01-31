@@ -3,6 +3,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Navbar from "./components/global/Navbar";
 import {
+    CATEGORY,
     HOME,
     LOGIN,
     PROFILE,
@@ -12,6 +13,7 @@ import {
     WRITE,
 } from "./constants/routes";
 import useAuth from "./hooks/useAuth";
+import Category from "./pages/category/Category";
 import Home from "./pages/home";
 import Login from "./pages/login";
 import Profile from "./pages/profile";
@@ -55,6 +57,10 @@ function App() {
                         {/* DESC:: PRIVATE USER ROUTES */}
                         <Route element={<PrivateOutlet allowed={ROLE_USER} />}>
                             <Route path={PROFILE} element={<Profile />} />
+                            <Route
+                                path={`${CATEGORY}/:catId`}
+                                element={<Category />}
+                            />
                             <Route path={WRITE} element={<Write />} />
                             <Route path={`/story/:id`} element={<Story />} />
                         </Route>

@@ -9,12 +9,14 @@ interface LatestStory {
     isLoading: boolean;
     error: string | undefined;
     categories: Category[] | [];
+    activeCategory: string;
 }
 const initialState: LatestStory = {
     isError: false,
     isLoading: false,
     categories: [],
     error: "",
+    activeCategory: "",
 };
 
 export const getCategory = createAsyncThunk(
@@ -27,7 +29,16 @@ export const getCategory = createAsyncThunk(
 const categorySlice = createSlice({
     name: "category",
     initialState,
-    reducers: {},
+    reducers: {
+        updateActiveCategory: (state, action) => {
+            let existing = state.categories.find(
+                (item) => item.categoryId === Number(action.payload)
+            );
+            const active = existing ? existing.categoryTitle : action.payload;
+
+            state.activeCategory = active;
+        },
+    },
     extraReducers: (builder) => {
         builder
             .addCase(getCategory.pending, (state: LatestStory) => {
@@ -47,6 +58,6 @@ const categorySlice = createSlice({
             });
     },
 });
-
+export const { updateActiveCategory } = categorySlice.actions;
 export const selectCategory = (state: RootState) => state.category;
 export default categorySlice.reducer;
