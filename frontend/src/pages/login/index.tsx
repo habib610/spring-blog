@@ -38,6 +38,7 @@ const Login = () => {
     /* @DESC::  handling userLogin */
     const handlerUserLogin = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
+        console.log("UserLogin");
 
         const getValidData = validateUserLoginForm(formData);
         setFormError(getValidData);
