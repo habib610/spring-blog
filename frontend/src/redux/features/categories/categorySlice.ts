@@ -38,6 +38,12 @@ const categorySlice = createSlice({
 
             state.activeCategory = active;
         },
+        addNewCategory: (state, action) => {
+            console.log(action);
+            let newCategory = [...state.categories, action.payload];
+
+            state.categories = newCategory;
+        },
     },
     extraReducers: (builder) => {
         builder
@@ -58,6 +64,6 @@ const categorySlice = createSlice({
             });
     },
 });
-export const { updateActiveCategory } = categorySlice.actions;
+export const { updateActiveCategory, addNewCategory } = categorySlice.actions;
 export const selectCategory = (state: RootState) => state.category;
 export default categorySlice.reducer;

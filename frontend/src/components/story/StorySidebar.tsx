@@ -13,14 +13,9 @@ import MoreFromAuthor from "./MoreFromAuthor";
 
 interface IProps {
     data: Post | null;
-    // isLoading: boolean;
-    // error: string;
-    // setData: Function;
-    // user: User | null;
 }
 export const StorySidebar = ({ data: user }: IProps) => {
     const id = useParams();
-    console.log(id);
 
     const { content, error, isError, isLoading } =
         useAppSelector(selectUserPost);

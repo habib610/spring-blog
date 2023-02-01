@@ -4,6 +4,7 @@ import latestReducer from "../features/latest/latestSlice";
 import loginReducer from "../features/login/loginSlice";
 import paginateReducer from "../features/paginate/paginateSlice";
 import registrationReducer from "../features/registration/registrationSlice";
+import userListReducer from "../features/user-list/userListSlice";
 import userPostReducer from "../features/user-post/userPostSlice";
 
 export const store = configureStore({
@@ -14,6 +15,7 @@ export const store = configureStore({
         userPosts: userPostReducer,
         paginate: paginateReducer,
         category: categoryReducer,
+        userList: userListReducer,
     },
     devTools: process.env.NODE_ENV !== "production",
 });

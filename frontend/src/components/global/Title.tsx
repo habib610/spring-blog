@@ -3,7 +3,7 @@ interface IProps {
 }
 const Title = (props: IProps) => {
     return (
-        <h2 className="text-gray-700 mb-3 text-2xl md:text-3xl font-semibold">
+        <h2 className="text-gray-600 mb-3 text-2xl md:text-3xl font-semibold">
             {props.title}
         </h2>
     );

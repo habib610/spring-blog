@@ -3,17 +3,25 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Navbar from "./components/global/Navbar";
 import {
+    ADD_CATEGORY,
     CATEGORY,
+    DASHBOARD,
     HOME,
     LOGIN,
     PROFILE,
     REGISTRATION,
+    ROLE_ADMIN,
     ROLE_USER,
     SEARCH,
+    STORY,
     UNAUTHORIZED,
+    USERS,
     WRITE,
 } from "./constants/routes";
 import useAuth from "./hooks/useAuth";
+import AddCategory from "./pages/admin/AddCategory";
+import Dashboard from "./pages/admin/Dashboard";
+import UsersList from "./pages/admin/UsersList";
 import Category from "./pages/category/Category";
 import Home from "./pages/home";
 import Login from "./pages/login";
@@ -38,6 +46,7 @@ function App() {
                 limit={1}
                 position="bottom-left"
                 theme="dark"
+                autoClose={3000}
                 closeButton={false}
                 // icon={false}
             />
@@ -64,8 +73,17 @@ function App() {
                                 element={<Category />}
                             />
                             <Route path={WRITE} element={<Write />} />
-                            <Route path={`/story/:id`} element={<Story />} />
+                            <Route path={`${STORY}/:id`} element={<Story />} />
                             <Route path={SEARCH} element={<Search />} />
+                        </Route>
+                        {/* DESC:: PRIVATE USER ROUTES */}
+                        <Route element={<PrivateOutlet allowed={ROLE_ADMIN} />}>
+                            <Route
+                                path={ADD_CATEGORY}
+                                element={<AddCategory />}
+                            />
+                            <Route path={USERS} element={<UsersList />} />
+                            <Route path={DASHBOARD} element={<Dashboard />} />
                         </Route>
 
                         <Route path={UNAUTHORIZED} element={<UnAuthorized />} />

@@ -46,7 +46,7 @@ const UserMenu = () => {
     };
     return (
         <div className="relative ">
-            <Menu as="span" className="z-10 inline-block p-0 mx-2">
+            <Menu as="span" className="z-10 inline-block p-0 mx-2 w-max">
                 <Menu.Button className="inline-block">
                     <div>
                         <div className="w-8 h-8 md:w-10 md:h-10  text-lg md:text-xl  rounded-full text-white bg-blue-400 flex items-center justify-center  font-bold uppercase ">
@@ -54,7 +54,7 @@ const UserMenu = () => {
                         </div>
                     </div>
                 </Menu.Button>
-                <Menu.Items className="flex flex-col absolute right-0 top-12">
+                <Menu.Items className="flex flex-col absolute right-0 top-12 min-w-max">
                     {menuLinks.map(({ link, label, id, icon, isAdmin }) => (
                         /* Use the `active` state to conditionally style the active item. */
                         <Menu.Item key={id} as={Fragment}>

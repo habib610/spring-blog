@@ -8,11 +8,13 @@ export const LOGIN = "/login";
 export const REGISTRATION = "/registration";
 export const WRITE = "/write";
 export const SEARCH = "/search";
+export const STORY = "/story";
 
 export const DASHBOARD = "/dashboard";
 export const PROFILE = "/profile";
 export const CATEGORY = "/category";
 export const USERS = "/users";
+export const ADD_CATEGORY = "/add-category";
 
 export const UNAUTHORIZED = "/unauthorized";
 
@@ -56,8 +58,8 @@ export const menuLinks = [
     },
     {
         id: 2,
-        label: "Category",
-        link: CATEGORY,
+        label: "Add Category",
+        link: ADD_CATEGORY,
         isAdmin: true,
         icon: BsListTask,
     },
@@ -85,6 +87,7 @@ export const UPLOAD_IMAGE_POST_ENDPOINT = "/api/posts/image/upload";
 export const RELATED_POST_BY_CATEGORY_ENDPOINT = "/api/category";
 export const COMMENT_ENDPOINT = "/api/post";
 export const SEARCH_POST_ENDPOINT = "/api/posts/search";
+export const USER_LIST_ENDPOINT = "/api/users/";
 
 export const GET_SIMILAR_USER_POST_ENDPOINT = "/api/users";
 export const REGISTRATION_ENDPOINT = "/api/v1/auth/register";
