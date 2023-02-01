@@ -47,7 +47,7 @@ public class GlobalExceptionHandler {
     public  ResponseEntity<Map<String, String>> handleUserAlreadyExistsException(DataIntegrityViolationException ex){
         Map<String, String>  response = new HashMap<>();
         String fieldName = "message";
-        String message = "Invalid email or password";
+        String message = "Invalid request";
         response.put(fieldName, message);
         return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
     }
