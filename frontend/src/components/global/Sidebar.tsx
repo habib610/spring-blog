@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { CATEGORY } from "../../constants/routes";
 import { useAppDispatch, useAppSelector } from "../../redux/app/hooks";
 import {
     getCategory,
@@ -34,7 +35,7 @@ const CategoryButton = () => {
     }, [categories.length, dispatch]);
 
     const handleCategory = (id: number) => {
-        router(`/category/${id}`);
+        router(`${CATEGORY}/${id}`);
     };
 
     let showCategory = null;
@@ -62,5 +63,23 @@ const CategoryButton = () => {
         ));
     }
 
-    return <div>{showCategory}</div>;
+    return (
+        <div>
+            {showCategory}
+
+            <div className="mt-24 mb-6 hidden lg:flex items-center gap-2  text-gray-500">
+                <p className="text-gray-500 text-xs">
+                    copyright &copy;habib610
+                </p>
+                <a
+                    target="_blank"
+                    href="https:rhabib.dev"
+                    className="hover:underline cursor-pointer text-xs"
+                    rel="noreferrer"
+                >
+                    Contact
+                </a>
+            </div>
+        </div>
+    );
 };

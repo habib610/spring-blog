@@ -1,3 +1,4 @@
+import { AnimatePresence } from "framer-motion";
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../redux/app/hooks";
 import {
@@ -74,16 +75,18 @@ const LatestBlog = () => {
     const pageCount = Math.ceil(totalElements / 4);
 
     return (
-        <div>
-            <Title title="Latest Stories" />
-            {showContent}
-            <Pagination
-                pageCount={pageCount}
-                firstPage={firstPage}
-                lastPage={lastPage}
-                onClick={handlePageClick}
-            />
-        </div>
+        <AnimatePresence>
+            <div>
+                <Title title="Latest Stories" />
+                {showContent}
+                <Pagination
+                    pageCount={pageCount}
+                    firstPage={firstPage}
+                    lastPage={lastPage}
+                    onClick={handlePageClick}
+                />
+            </div>
+        </AnimatePresence>
     );
 };
 

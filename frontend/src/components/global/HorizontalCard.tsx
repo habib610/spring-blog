@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import { AVATAR_URL } from "../../constants/common";
 import { PRIMARY } from "../../constants/theme";
-import { POST } from "../../pages/story";
 import { Post } from "../../types/types";
 import CategoryBtn from "./CategoryBtn";
 import UserInfo from "./UserInfo";
@@ -9,8 +8,7 @@ import UserInfo from "./UserInfo";
 interface IProps {
     data: Post;
 }
-const HorizontalCard = () => {
-    const data = POST;
+const HorizontalCard = ({ data }: IProps) => {
     return (
         <div>
             <div className="flex flex-col  md:flex-row justify-start md:justify-center bg-gray-100  ">

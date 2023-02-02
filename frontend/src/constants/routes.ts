@@ -88,6 +88,7 @@ export const RELATED_POST_BY_CATEGORY_ENDPOINT = "/api/category";
 export const COMMENT_ENDPOINT = "/api/post";
 export const SEARCH_POST_ENDPOINT = "/api/posts/search";
 export const USER_LIST_ENDPOINT = "/api/users/";
+export const TOP_POST_ENDPOINT = "/api/posts/top";
 
 export const GET_SIMILAR_USER_POST_ENDPOINT = "/api/users";
 export const REGISTRATION_ENDPOINT = "/api/v1/auth/register";

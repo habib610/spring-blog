@@ -1,14 +1,18 @@
+import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { BLOG_IMAGE_ENDPOINT } from "../../constants/routes";
 import { Post } from "../../types/types";
 import Avatar from "../global/Avatar";
-
 interface IProps {
     data: Post;
 }
 const MoreFromAuthor = ({ data }: IProps) => {
     return (
-        <div className="mt-2 border-t py-1 border-gray-10">
+        <motion.div
+            whileInView={{ opacity: [0, 1] }}
+            transition={{ duration: 0.5 }}
+            className="mt-2 border-t py-1 border-gray-10"
+        >
             <div className="flex items-center">
                 <div className="flex items-center">
                     <Avatar
@@ -35,7 +39,7 @@ const MoreFromAuthor = ({ data }: IProps) => {
                     alt={data.title}
                 />
             </div>
-        </div>
+        </motion.div>
     );
 };
 

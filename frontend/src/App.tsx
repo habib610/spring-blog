@@ -1,4 +1,10 @@
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { useEffect } from "react";
+import {
+    BrowserRouter as Router,
+    Route,
+    Routes,
+    useLocation,
+} from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Navbar from "./components/global/Navbar";
@@ -33,6 +39,7 @@ import UnAuthorized from "./pages/UnAuthorized";
 import Write from "./pages/write";
 import PrivateOutlet from "./routes/PrivateOutlet";
 import PublicOutlet from "./routes/PublicOutlet";
+
 function App() {
     const checkAuth = useAuth();
     return !checkAuth ? (
@@ -50,8 +57,10 @@ function App() {
                 closeButton={false}
                 // icon={false}
             />
+
             <Router>
                 <div>
+                    <ScrollToTop />
                     <Navbar />
                     <Routes>
                         <Route path={HOME} element={<Home />} />
@@ -96,3 +105,13 @@ function App() {
 }
 
 export default App;
+
+function ScrollToTop() {
+    const { pathname } = useLocation();
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [pathname]);
+
+    return null;
+}
