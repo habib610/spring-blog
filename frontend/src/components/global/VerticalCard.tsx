@@ -13,6 +13,7 @@ interface IProps {
 
 const VerticalCard = ({ data }: IProps) => {
     const addedDate = moment(data.addedDate).format("DD MMM, YY");
+
     return (
         <motion.div
             key="modal"
@@ -46,12 +47,10 @@ const VerticalCard = ({ data }: IProps) => {
                                 style={{ fontSize: "16px" }}
                                 className="text-md text-gray-500 mb-2 line-clamp-2"
                             ></div>
-                            dfsdfgg
-                            <Link to={`story/${data.id}`}>
-                                <button className="bg-transparent outline-none border-none cursor-pointer text-rose-500  hover:cursor-pointer hover:underline transition-all my-3">
-                                    Read more..
-                                </button>
-                            </Link>
+
+                            <button className="bg-transparent outline-none border-none cursor-pointer text-rose-500  hover:cursor-pointer hover:underline transition-all my-3">
+                                Read more..
+                            </button>
                         </div>
                         <div className="mt-auto flex items-end justify-between">
                             <div className="">
