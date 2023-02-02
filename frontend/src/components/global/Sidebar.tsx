@@ -64,13 +64,11 @@ const CategoryButton = () => {
     }
 
     return (
-        <div>
+        <div className="border-b">
             {showCategory}
 
-            <div className="mt-24 mb-6 hidden lg:flex items-center gap-2  text-gray-500">
-                <p className="text-gray-500 text-xs">
-                    copyright &copy;habib610
-                </p>
+            <div className="mt-24 mb-6 hidden lg:flex items-center justify-center gap-2  text-gray-500">
+                <p className="text-gray-500 text-xs">copyright&copy;habib610</p>
                 <a
                     target="_blank"
                     href="https:rhabib.dev"

@@ -30,7 +30,10 @@ const Navbar = () => {
         userAvatar = <UserMenu />;
     }
     const navItems = user && token ? authLinks : links;
-
+    let regularClass =
+        "px-3 py-2 border-1 border-orange-50 font-semibold hover:text-white hover:bg-orange-400 text-white rounded-md  ";
+    let activeClass =
+        "px-3 py-2 border-1 border-orange-50 font-semibold text-white text-white rounded-md border-b";
     return (
         <nav>
             <div
@@ -63,11 +66,17 @@ const Navbar = () => {
 
                     <div className="flex items-center md:flex-row-reverse">
                         {userAvatar}
-                        <ul className="hidden md:flex flex-end items-center">
+                        <ul className="hidden md:flex flex-end items-center gap-2">
                             {navItems.map((link) => (
                                 <li key={link.id}>
                                     <Link to={link.link}>
-                                        <span className="px-3 py-2 border-1 border-orange-50 font-semibold hover:text-white hover:bg-orange-400 text-white rounded-md">
+                                        <span
+                                            className={
+                                                link.link === pathname
+                                                    ? activeClass
+                                                    : regularClass
+                                            }
+                                        >
                                             {link.label}
                                         </span>
                                     </Link>
@@ -101,7 +110,7 @@ const Navbar = () => {
                                         </button>
                                     </div>
                                     <ul className="flex flex-col justify-start">
-                                        {links.map((link) => (
+                                        {navItems.map((link) => (
                                             <li
                                                 key={link.id}
                                                 className="px-3 py-2 border-1 border-orange-50 font-semibold hover:text-white hover:bg-orange-400 w-100mb-2"
