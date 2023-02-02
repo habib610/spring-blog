@@ -1,5 +1,6 @@
 package com.example.springblog.controllers;
 
+import com.example.springblog.AppConstants;
 import com.example.springblog.entities.Post;
 import com.example.springblog.payload.PostDto;
 import com.example.springblog.payload.PostResponse;
@@ -23,7 +24,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
+@CrossOrigin(origins =  AppConstants.ORIGIN, maxAge = 3600)
 public class PostController {
 
 

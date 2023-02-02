@@ -1,7 +1,7 @@
 package com.example.springblog.controllers;
 
 
-import com.example.springblog.entities.Users;
+import com.example.springblog.AppConstants;
 import com.example.springblog.exceptions.ApiException;
 import com.example.springblog.payload.JwtAuthRequest;
 import com.example.springblog.payload.JwtAuthResponse;
@@ -16,7 +16,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.*;
@@ -25,7 +24,7 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/api/v1/auth")
-@CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
+@CrossOrigin(origins = AppConstants.ORIGIN, maxAge = 3600)
 public class AuthController {
     @Autowired
     private JwtTokenHelper jwtTokenHelper;
@@ -57,11 +56,9 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<UserDetailResponse> registerUser(@Valid @RequestBody UserDto userDto ) {
+    public ResponseEntity<UserDetailResponse> registerUser(@Valid @RequestBody UserDto userDto) {
         UserDetailResponse response = userService.registerUser(userDto);
-        System.out.println("USER=====>>>");
-        System.out.println(userDto);
-        System.out.println("USER=====>>>");
+
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 

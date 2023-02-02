@@ -1,5 +1,6 @@
 package com.example.springblog.controllers;
 
+import com.example.springblog.AppConstants;
 import com.example.springblog.payload.CategoryDto;
 import com.example.springblog.response.ApiResponse;
 import com.example.springblog.services.CategoryServices;
@@ -16,7 +17,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(path = "/api/category")
-@CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
+@CrossOrigin(origins =  AppConstants.ORIGIN, maxAge = 3600)
 public class CategoryController {
     @Autowired
     private CategoryServices categoryServices;
