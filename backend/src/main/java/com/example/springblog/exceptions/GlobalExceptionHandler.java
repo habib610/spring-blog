@@ -1,6 +1,7 @@
 package com.example.springblog.exceptions;
 
 import com.example.springblog.response.ApiResponse;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -31,8 +32,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<Map<String, String>> handleMethodArgumentNotValidException(MethodArgumentNotValidException ex) {
         Map<String, String> response = new HashMap<>();
-        System.out.println("BindingResult: " + ex.getBindingResult());
-        System.out.println("All Erroros: " + ex.getBindingResult().getAllErrors());
+
         ex.getBindingResult().getAllErrors().forEach(objectError -> {
             String fieldName = ((FieldError) objectError).getField();
             String message = objectError.getDefaultMessage();
@@ -41,5 +41,14 @@ public class GlobalExceptionHandler {
 
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
 
+    }
+
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public  ResponseEntity<Map<String, String>> handleUserAlreadyExistsException(DataIntegrityViolationException ex){
+        Map<String, String>  response = new HashMap<>();
+        String fieldName = "message";
+        String message = "Invalid request";
+        response.put(fieldName, message);
+        return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

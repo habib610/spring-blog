@@ -39,6 +39,7 @@ public class Users implements UserDetails {
             nullable = false,
             unique = true
     )
+
     private String email;
     @Column(
             nullable = false,

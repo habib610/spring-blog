@@ -1,6 +1,7 @@
 package com.example.springblog.controllers;
 
 
+import com.example.springblog.AppConstants;
 import com.example.springblog.exceptions.ApiException;
 import com.example.springblog.payload.JwtAuthRequest;
 import com.example.springblog.payload.JwtAuthResponse;
@@ -17,13 +18,13 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/api/v1/auth")
+@CrossOrigin(origins = AppConstants.ORIGIN, maxAge = 3600)
 public class AuthController {
     @Autowired
     private JwtTokenHelper jwtTokenHelper;
@@ -39,6 +40,7 @@ public class AuthController {
     private UserService userService;
 
     @PostMapping("/login")
+
     public ResponseEntity<JwtAuthResponse> createToken(
             @RequestBody JwtAuthRequest jwtAuthRequest
     ) throws Exception {
@@ -48,12 +50,13 @@ public class AuthController {
 
         JwtAuthResponse jwtAuthResponse = new JwtAuthResponse();
         jwtAuthResponse.setToken(token);
+        jwtAuthResponse.setUser(modelMapper.map(userDetails, UserDto.class));
 
         return new ResponseEntity<>(jwtAuthResponse, HttpStatus.OK);
     }
 
     @PostMapping("/register")
-    public ResponseEntity<UserDetailResponse> registerUser(@RequestBody UserDto userDto) {
+    public ResponseEntity<UserDetailResponse> registerUser(@Valid @RequestBody UserDto userDto) {
         UserDetailResponse response = userService.registerUser(userDto);
 
         return new ResponseEntity<>(response, HttpStatus.CREATED);

@@ -1,5 +1,6 @@
 package com.example.springblog.controllers;
 
+import com.example.springblog.AppConstants;
 import com.example.springblog.payload.CommentDto;
 import com.example.springblog.response.ApiResponse;
 import com.example.springblog.services.CommentService;
@@ -12,6 +13,7 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/api")
+@CrossOrigin(origins =  AppConstants.ORIGIN, maxAge = 3600, methods = {RequestMethod.DELETE, RequestMethod.POST, RequestMethod.GET, RequestMethod.PUT})
 public class CommentController {
 
     @Autowired
