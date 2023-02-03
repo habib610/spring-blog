@@ -51,7 +51,7 @@ public class PostController {
     //    GET all posts
     @GetMapping("/posts")
     public ResponseEntity<PostResponse> getAllPosts(
-            @RequestParam(value = "pageSize", defaultValue = "10", required = false) Integer pageSize,
+            @RequestParam(value = "pageSize", defaultValue = "4", required = false) Integer pageSize,
             @RequestParam(value = "pageNumber", defaultValue = "0", required = false) Integer pageNumber,
             @RequestParam(value = "sort", defaultValue = "id", required = false) String sort,
             @RequestParam(value = "order", defaultValue = "desc", required = false) String order

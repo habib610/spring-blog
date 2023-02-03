@@ -36,7 +36,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             "/api/posts/top",
             "/api/category/",
             "/api/post/image/**"
-
     };
 
     @Autowired
