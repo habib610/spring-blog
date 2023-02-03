@@ -1,5 +1,6 @@
 package com.example.springblog.payload;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -19,7 +20,7 @@ public class UserDto {
     private Long id;
 
     @NotBlank
-    @Size(min = 4, max = 100, message = "User name must be minimum 4 characters and max 100 characters")
+    @Size(min = 3, max = 100, message = "User name must be minimum 4 characters and max 100 characters")
     private String name;
 
     @NotBlank
@@ -36,4 +37,9 @@ public class UserDto {
     private String password;
 
     private Set<RoleDto> roles = new HashSet<>();
+
+//    @JsonIgnore
+//    public String getPassword() {
+//        return password;
+//    }
 }

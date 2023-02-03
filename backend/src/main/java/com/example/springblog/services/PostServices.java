@@ -31,4 +31,5 @@ public interface PostServices {
     List<PostDto> getPostByTitle(String kyeword);
 
 
+    List<PostDto> getTopPosts();
 }

@@ -1,5 +1,7 @@
 package com.example.springblog.controllers;
 
+import com.example.springblog.AppConstants;
+import com.example.springblog.entities.Post;
 import com.example.springblog.payload.PostDto;
 import com.example.springblog.payload.PostResponse;
 import com.example.springblog.response.ApiResponse;
@@ -22,6 +24,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api")
+@CrossOrigin(origins =  AppConstants.ORIGIN, maxAge = 3600)
 public class PostController {
 
 
@@ -48,13 +51,20 @@ public class PostController {
     //    GET all posts
     @GetMapping("/posts")
     public ResponseEntity<PostResponse> getAllPosts(
-            @RequestParam(value = "pageSize", defaultValue = "10", required = false) Integer pageSize,
+            @RequestParam(value = "pageSize", defaultValue = "4", required = false) Integer pageSize,
             @RequestParam(value = "pageNumber", defaultValue = "0", required = false) Integer pageNumber,
             @RequestParam(value = "sort", defaultValue = "id", required = false) String sort,
             @RequestParam(value = "order", defaultValue = "desc", required = false) String order
     ) {
         PostResponse postDtoList = postServices.getAllPosts(pageNumber, pageSize, sort, order);
         return ResponseEntity.ok(postDtoList);
+    }
+
+//    Get Top posts
+    @GetMapping("/posts/top")
+    public ResponseEntity<List<PostDto>> getTopPosts(){
+        List<PostDto> postResponse = postServices.getTopPosts();
+        return ResponseEntity.ok(postResponse);
     }
 
 
