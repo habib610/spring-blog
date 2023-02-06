@@ -16,7 +16,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(path = AppConstants.USER_PATH)
-@CrossOrigin(origins = AppConstants.ORIGIN, maxAge = 3600)
+@CrossOrigin("*")
 public class UserController {
     @Autowired
     private UserService userService;
@@ -38,10 +38,7 @@ public class UserController {
 
     //    PUT - update user by userId
     @PutMapping("/{userId}")
-    public ResponseEntity<UserDto> updateUserByUserId(
-            @Valid
-            @RequestBody UserDto userDto,
-            @PathVariable("userId") Long uId) { // name path variable anything now
+    public ResponseEntity<UserDto> updateUserByUserId(@Valid @RequestBody UserDto userDto, @PathVariable("userId") Long uId) { // name path variable anything now
         UserDto updateUser = userService.updateUser(userDto, uId);
         return ResponseEntity.ok(updateUser);
     }

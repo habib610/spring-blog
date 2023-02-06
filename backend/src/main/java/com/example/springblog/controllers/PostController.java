@@ -1,7 +1,5 @@
 package com.example.springblog.controllers;
 
-import com.example.springblog.AppConstants;
-import com.example.springblog.entities.Post;
 import com.example.springblog.payload.PostDto;
 import com.example.springblog.payload.PostResponse;
 import com.example.springblog.response.ApiResponse;
@@ -24,7 +22,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin(origins =  AppConstants.ORIGIN, maxAge = 3600)
+@CrossOrigin("*")
 public class PostController {
 
 
@@ -39,30 +37,21 @@ public class PostController {
 
     //CREATE new post
     @PostMapping("/user/{userId}/category/{categoryId}/posts")
-    public ResponseEntity<PostDto> createNewPost(@Valid
-                                                 @RequestBody PostDto postDto,
-                                                 @PathVariable Long userId,
-                                                 @PathVariable Long categoryId
-    ) {
+    public ResponseEntity<PostDto> createNewPost(@Valid @RequestBody PostDto postDto, @PathVariable Long userId, @PathVariable Long categoryId) {
         PostDto postDto1 = postServices.createPost(postDto, userId, categoryId);
         return new ResponseEntity<>(postDto1, HttpStatus.CREATED);
     }
 
     //    GET all posts
     @GetMapping("/posts")
-    public ResponseEntity<PostResponse> getAllPosts(
-            @RequestParam(value = "pageSize", defaultValue = "4", required = false) Integer pageSize,
-            @RequestParam(value = "pageNumber", defaultValue = "0", required = false) Integer pageNumber,
-            @RequestParam(value = "sort", defaultValue = "id", required = false) String sort,
-            @RequestParam(value = "order", defaultValue = "desc", required = false) String order
-    ) {
+    public ResponseEntity<PostResponse> getAllPosts(@RequestParam(value = "pageSize", defaultValue = "4", required = false) Integer pageSize, @RequestParam(value = "pageNumber", defaultValue = "0", required = false) Integer pageNumber, @RequestParam(value = "sort", defaultValue = "id", required = false) String sort, @RequestParam(value = "order", defaultValue = "desc", required = false) String order) {
         PostResponse postDtoList = postServices.getAllPosts(pageNumber, pageSize, sort, order);
         return ResponseEntity.ok(postDtoList);
     }
 
-//    Get Top posts
+    //    Get Top posts
     @GetMapping("/posts/top")
-    public ResponseEntity<List<PostDto>> getTopPosts(){
+    public ResponseEntity<List<PostDto>> getTopPosts() {
         List<PostDto> postResponse = postServices.getTopPosts();
         return ResponseEntity.ok(postResponse);
     }
@@ -112,10 +101,7 @@ public class PostController {
 
     //    File uploade services
     @PostMapping("/posts/image/upload/{postId}")
-    public ResponseEntity<PostDto> uploadImage(
-            @RequestParam("image") MultipartFile image,
-            @PathVariable Long postId
-    ) throws IOException {
+    public ResponseEntity<PostDto> uploadImage(@RequestParam("image") MultipartFile image, @PathVariable Long postId) throws IOException {
         PostDto postDto = postServices.getPostById(postId);
         String fileName = fileService.uploadFile(filePath, image);
         postDto.setImageName(fileName);
@@ -126,9 +112,7 @@ public class PostController {
 
 
     @GetMapping(value = "/post/image/{imageName}", produces = MediaType.IMAGE_JPEG_VALUE)
-    public void downloadImage(
-            @PathVariable String imageName,
-            HttpServletResponse response) throws IOException {
+    public void downloadImage(@PathVariable String imageName, HttpServletResponse response) throws IOException {
         InputStream resource = fileService.getFileResource(filePath, imageName);
 
         response.setContentType(MediaType.IMAGE_JPEG_VALUE);

@@ -13,7 +13,7 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin(origins =  AppConstants.ORIGIN, maxAge = 3600, methods = {RequestMethod.DELETE, RequestMethod.POST, RequestMethod.GET, RequestMethod.PUT})
+@CrossOrigin("*")
 public class CommentController {
 
     @Autowired
