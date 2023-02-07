@@ -86,4 +86,4 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 # Live Preview
 
-## [https://fotogramx.web.app/](https://hrblog.netlify.app)
+## [https://hrblog.netlify.app/](https://hrblog.netlify.app)
