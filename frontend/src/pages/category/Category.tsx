@@ -25,7 +25,6 @@ const Category = () => {
 
     useEffect(() => {
         dispatch(updateActiveCategory(catId));
-        console.log(catId);
     }, [catId, dispatch]);
 
     const { activeCategory } = useAppSelector(selectCategory);

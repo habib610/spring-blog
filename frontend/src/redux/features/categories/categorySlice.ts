@@ -39,7 +39,6 @@ const categorySlice = createSlice({
             state.activeCategory = active;
         },
         addNewCategory: (state, action) => {
-            console.log(action);
             let newCategory = [...state.categories, action.payload];
 
             state.categories = newCategory;

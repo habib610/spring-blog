@@ -123,7 +123,6 @@ const Write = () => {
                 setPostLoading(false);
                 setPreview("");
             } catch (error: any) {
-                console.log(error);
                 const errorMsg =
                     typeof error === "string"
                         ? error

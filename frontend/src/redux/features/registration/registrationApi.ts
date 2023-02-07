@@ -11,7 +11,6 @@ export const createNewUser = async (data: User) => {
 
         return res;
     } catch (error: any) {
-        console.log(error);
         throw new Error(
             error?.response?.data?.message || error?.message || ERR_MSG
         );
