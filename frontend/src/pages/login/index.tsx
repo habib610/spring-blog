@@ -102,6 +102,7 @@ const Login = () => {
                             label="Password"
                             placeholder="Enter your password"
                             value={formData.password}
+                            type="password"
                         />
                         <div className="flex justify-end">
                             <button className="mt-1 mb-1 text-primary-500 cursor-pointer hover:underline text-right ">

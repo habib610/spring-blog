@@ -1,11 +1,11 @@
 import axiosRoot from "axios";
+import { BASE_URL } from "../constants/routes";
 
 const axios = axiosRoot.create({
-    baseURL: process.env.REACT_APP_BASE_API_URL,
+    baseURL: BASE_URL,
     headers: {
-        Accept: "*/*",
+        Accept: "*",
         "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
     },
 });
 export default axios;
