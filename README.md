@@ -16,17 +16,18 @@ This application is a fullstack blog sharing platform where user can write their
 
 # Technologies Used
 
-1.  JavaScript
-2.  React.js
-3.  Tailwindcss
-4.  Framer Motion
-5.  Java
-6.  Spring-Boot
-7.  PostgreSQL
-8.  Maven
-9.  Spring Security
-10. Amazon Web Service
-11. Netlify
+1.  Typescript
+2.  JavaScript
+3.  React.js
+4.  Tailwindcss
+5.  Framer Motion
+6.  Java
+7.  Spring-Boot
+8.  PostgreSQL
+9.  Maven
+10. Spring Security
+11. Amazon Web Service
+12. Netlify
 
 # Install packages and running the project:
 
