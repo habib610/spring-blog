@@ -6,4 +6,5 @@ public class AppConstants {
     public static final Long ROLE_ADMIN = 1000L;
     public static final Long ROLE_USER = 1001L;
     public static final String ORIGIN = "https://hrblog.netlify.app";
+    public static final String ORIGIN_LOCAL = "http://localhost:3000";
 }

@@ -8,6 +8,7 @@ interface IProps {
     value?: string;
     message?: string;
     name?: string;
+    type?: string;
 }
 
 const Input = ({
@@ -17,6 +18,7 @@ const Input = ({
     value,
     message,
     name,
+    type = "text",
 }: IProps) => {
     const errorStyle =
         "border border-rose-500 py-2 px-4 w-full outline-none bg-transparent text-gray-600 shadow-none focus:border-blue-500 rounded-md focus:shadow-md shadow-rose-500";
@@ -31,6 +33,7 @@ const Input = ({
                 value={value}
                 onChange={onChange}
                 name={name}
+                type={type}
             />
             <ErrorMessage message={message} />
         </div>

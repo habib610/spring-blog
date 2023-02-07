@@ -17,8 +17,8 @@ import {
     selectRegistration,
 } from "../../redux/features/registration/registrationSlice";
 import { RegistrationFormData, RegistrationFormError } from "../../types/types";
+
 const Registration = () => {
-    const [localError, setLocalErr] = useState("");
     // Registration
     const {
         error: signUpError,
@@ -90,11 +90,11 @@ const Registration = () => {
     };
 
     let showError = null;
-    if (isSignUpErr || isError || localError) {
+    if (isSignUpErr || isError) {
         showError = (
             <Message
                 error={isSignUpErr || isError}
-                message={signUpError || error || localError}
+                message={signUpError || error}
             />
         );
     }
@@ -167,6 +167,7 @@ const Registration = () => {
                             name="password"
                             placeholder="Enter your password"
                             value={formData.password}
+                            type="password"
                         />
                         <Input
                             onChange={handleChange}
@@ -175,6 +176,7 @@ const Registration = () => {
                             name="confirmPassword"
                             placeholder="Enter confirm password"
                             value={formData.confirmPassword}
+                            type="password"
                         />
                         <div className="flex justify-end">
                             <button className="mt-1 mb-1 text-primary-500 cursor-pointer hover:underline text-right ">

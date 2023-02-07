@@ -3,6 +3,11 @@ import { CgProfile } from "react-icons/cg";
 import { FiUsers } from "react-icons/fi";
 import { RxDashboard } from "react-icons/rx";
 
+export const BASE_URL =
+    process.env.NODE_ENV === "production"
+        ? process.env.REACT_APP_BASE_API_URL_PROD
+        : process.env.REACT_APP_BASE_API_URL_DEV;
+
 export const HOME = "/";
 export const LOGIN = "/login";
 export const REGISTRATION = "/registration";
@@ -97,10 +102,8 @@ export const LATEST_POST_ENDPOINT = "/api/posts";
 export const DELETE_POST_ENDPOINT = "/api/posts";
 export const UPDATE_POST_ENDPOINT = "/api/posts";
 export const GET_POST_BY_CATEGORY_ENDPOINT = "/api/category";
-export const BLOG_IMAGE_ENDPOINT =
-    process.env.REACT_APP_BASE_API_URL + "/api/post/image/";
-export const CATEGORY_ENDPOINT =
-    process.env.REACT_APP_BASE_API_URL + "/api/category/";
+export const BLOG_IMAGE_ENDPOINT = BASE_URL + "/api/post/image/";
+export const CATEGORY_ENDPOINT = "/api/category/";
 
 // USER ROLE
 export const ROLE_ADMIN = "ROLE_ADMIN";

@@ -8,7 +8,12 @@ export const postUserData = async (data: {
 }) => {
     try {
         return await (
-            await axios.post(LOGIN_ENDPOINT, JSON.stringify(data))
+            await axios.post(LOGIN_ENDPOINT, data, {
+                headers: {
+                    Accept: "*",
+                    "Content-Type": "application/json",
+                },
+            })
         ).data;
     } catch (error: any) {
         console.log(error);
