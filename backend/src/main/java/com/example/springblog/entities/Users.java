@@ -20,35 +20,17 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class Users implements UserDetails {
     @Id
-    @SequenceGenerator(
-            name = "blog_user_sequence",
-            allocationSize = 1,
-            sequenceName = "blog_user_sequence"
-    )
-    @GeneratedValue(
-            generator = "blog_user_sequence",
-            strategy = GenerationType.SEQUENCE
-    )
+    @SequenceGenerator(name = "blog_user_sequence", allocationSize = 1, sequenceName = "blog_user_sequence")
+    @GeneratedValue(generator = "blog_user_sequence", strategy = GenerationType.SEQUENCE)
     private Long id;
-    @Column(
-            nullable = false,
-            length = 100
-    )
+    @Column(nullable = false, length = 100)
     private String name;
-    @Column(
-            nullable = false,
-            unique = true
-    )
+    @Column(nullable = false, unique = true)
 
     private String email;
-    @Column(
-            nullable = false,
-            length = 500
-    )
+    @Column(nullable = false, length = 500)
     private String about;
-    @Column(
-            nullable = false
-    )
+    @Column(nullable = false)
     private String password;
 
 
@@ -56,9 +38,7 @@ public class Users implements UserDetails {
     private List<Post> postList = new ArrayList<>();
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinTable(name = "user_role",
-            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id")
+    @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id")
 
     )
     private Set<Role> roles = new HashSet<>();

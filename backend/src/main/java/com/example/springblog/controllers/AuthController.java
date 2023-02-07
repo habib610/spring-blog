@@ -24,7 +24,7 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/api/v1/auth")
-@CrossOrigin(origins = AppConstants.ORIGIN, maxAge = 3600)
+@CrossOrigin("*")
 public class AuthController {
     @Autowired
     private JwtTokenHelper jwtTokenHelper;

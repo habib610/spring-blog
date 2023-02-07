@@ -44,8 +44,8 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(DataIntegrityViolationException.class)
-    public  ResponseEntity<Map<String, String>> handleUserAlreadyExistsException(DataIntegrityViolationException ex){
-        Map<String, String>  response = new HashMap<>();
+    public ResponseEntity<Map<String, String>> handleUserAlreadyExistsException(DataIntegrityViolationException ex) {
+        Map<String, String> response = new HashMap<>();
         String fieldName = "message";
         String message = "Invalid request";
         response.put(fieldName, message);

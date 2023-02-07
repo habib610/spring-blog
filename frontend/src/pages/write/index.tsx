@@ -19,7 +19,7 @@ import {
     selectCategory,
 } from "../../redux/features/categories/categorySlice";
 import { selectAuth } from "../../redux/features/login/loginSlice";
-import { StoryForm, StoryFormError } from "../../types/types";
+import { StoryFormError } from "../../types/types";
 import axios from "../../utils/axiosInstance";
 
 const Write = () => {
@@ -31,10 +31,9 @@ const Write = () => {
     const [storyImage, setStoryImage] = useState(null);
     const [preview, setPreview] = useState<string>("");
 
-    const [formData, setFormData] = useState<StoryForm>({
-        title: "",
-        content: "",
-    });
+    const [title, setTitle] = useState("");
+    const [content, setContent] = useState("");
+
     const [formError, setFormError] = useState<StoryFormError>({
         titleError: "",
         contentError: "",
@@ -81,7 +80,7 @@ const Write = () => {
     ) => {
         e.preventDefault();
 
-        const getValidData = validateStoryUploadForm(formData);
+        const getValidData = validateStoryUploadForm({ title, content });
         setFormError(getValidData);
 
         if (Object.keys(getValidData).length === 0) {
@@ -92,8 +91,8 @@ const Write = () => {
                     `${CREATE_POST_ENDPOINT}/${user?.id}/category/${categoryId}/posts`,
 
                     JSON.stringify({
-                        title: formData.title,
-                        content: formData.content,
+                        title: title,
+                        content: content,
                         imageName: "default.jpg",
                     })
                 );
@@ -117,7 +116,8 @@ const Write = () => {
                     );
                 }
                 toast.success(POST_PUBLISHED);
-                setFormData({ content: "", title: "" });
+                setTitle("");
+                setContent("");
                 setStoryImage(null);
                 setPostError("");
                 setPostLoading(false);
@@ -137,8 +137,7 @@ const Write = () => {
         }
     };
 
-    const buttonDisabled =
-        isLoading || postLoading || !formData.title || !formData.content;
+    const buttonDisabled = isLoading || postLoading || !title || !content;
     return (
         <Container>
             <div className="flex w-full justify-center">
@@ -157,28 +156,18 @@ const Write = () => {
                     <div className="lg:w-8/12">
                         <Input
                             label="Story Title"
-                            onChange={(e) =>
-                                setFormData({
-                                    ...formData,
-                                    title: e.target.value,
-                                })
-                            }
+                            onChange={(e) => setTitle(e.target.value)}
                             message={formError.titleError}
                             placeholder="Enter Your Story Title"
-                            value={formData.title}
+                            value={title}
                         />
                     </div>
                     <div className="mt-4">
                         <h2 className="text-black mb-1">Write your Stories</h2>
                         <div className="border border-gray-200 ">
                             <StoryEditor
-                                onChange={(value: any) =>
-                                    setFormData({
-                                        ...formData,
-                                        content: value,
-                                    })
-                                }
-                                defaultValue={formData.content}
+                                onChange={(value: any) => setContent(value)}
+                                defaultValue={content}
                                 error={formError.contentError}
                             />
                         </div>

@@ -227,7 +227,7 @@ const StoryPage = ({ data, loading, error, setData, user }: IProps) => {
         );
     }
     if (!relatedLoading && related.length === 0) {
-        showContent = (
+        showRelatedContent = (
             <Message error={false} message="No recommendation available " />
         );
     }
