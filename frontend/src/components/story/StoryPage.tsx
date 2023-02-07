@@ -87,7 +87,7 @@ const StoryPage = ({ data, loading, error, setData, user }: IProps) => {
                     <Comments
                         key={item.id}
                         content={item.content}
-                        name={data?.users.name}
+                        name={item.userName}
                     />
                 ));
         } else {

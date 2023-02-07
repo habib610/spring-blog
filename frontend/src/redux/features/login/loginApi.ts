@@ -16,7 +16,6 @@ export const postUserData = async (data: {
             })
         ).data;
     } catch (error: any) {
-        console.log(error);
         throw new Error(
             error?.response?.data?.message || error?.message || ERR_MSG
         );

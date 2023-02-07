@@ -33,10 +33,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             "/swagger-ui/**",
             "/webjars/**",
             "/api/post/image/**",
+            "/api/**"
 //            "/api/posts",
 //            "/api/posts/top",
 //            "/api/category/",
-//            "/api/post/image/**"
+
     };
 
     @Autowired
