@@ -19,6 +19,7 @@ import { selectAuth } from "../../redux/features/login/loginSlice";
 import UserMenu from "./UserMenu";
 
 const Navbar = () => {
+    const navigate = useNavigate();
     const [isOpen, setIsOpen] = useState(false);
 
     const { pathname } = useLocation();
@@ -99,11 +100,13 @@ const Navbar = () => {
                                         ease: "easeOut",
                                     }}
                                     exit={{ x: [-300, 0] }}
-                                    className="fixed top-0 right-0 w-[80%] h-screen bg-orange-300"
+                                    className="fixed top-0 right-0 w-[80%] h-screen bg-blue-500"
                                 >
                                     <div className="flex justify-end mt-4 mx-4 m-3">
                                         <button
-                                            onClick={() => setIsOpen(false)}
+                                            onClick={() => {
+                                                setIsOpen(false);
+                                            }}
                                             className="bg-orange-500 text-white h-[30px] w-[30px] flex  items-center justify-center rounded-full"
                                         >
                                             <AiOutlineClose />
@@ -112,14 +115,17 @@ const Navbar = () => {
                                     <ul className="flex flex-col justify-start">
                                         {navItems.map((link) => (
                                             <li
+                                                role="button"
+                                                onClick={() => {
+                                                    navigate(link.link);
+                                                    setIsOpen(false);
+                                                }}
                                                 key={link.id}
-                                                className="px-3 py-2 border-1 border-orange-50 font-semibold hover:text-white hover:bg-orange-400 w-100mb-2"
+                                                className="px-3 py-2 border-1 border-orange-50 font-semibold hover:text-white hover:bg-orange-400 w-100mb-2  "
                                             >
-                                                <Link to={link.link}>
-                                                    <span className="">
-                                                        {link.label}
-                                                    </span>
-                                                </Link>
+                                                <span className="text-white ">
+                                                    {link.label}
+                                                </span>
                                             </li>
                                         ))}
                                     </ul>
